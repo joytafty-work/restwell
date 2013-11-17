@@ -193,11 +193,11 @@
                 <div class="row-fluid">
                     <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
                         <p>Bed time</p>
-                        <h4 id="bedtime">9:30 pm</h4>
+                        <h4 id="bedtime"></h4>
                     </div>
                     <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
                         <p>Awake time</p>
-                        <h4 id="awaketime">6:14 am</h4>
+                        <h4 id="awaketime"></h4>
                     </div>
                     <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
                         <p>Day</p>
@@ -255,12 +255,16 @@ $.getJSON('/sleep/startTime.json', function (data) {
    if(data.length == 0) {
        alert('No sleep recorded.  Please hold the Fitbit button before falling asleep.');
    } else {
+        datum = data[data.length - 1];
+        sleepDate = Date(datum['sleep-startTime']['dateTime'])
+        sleepStart = datum['sleep-startTime']['value']
+        console.log(Date.parse(sleepDate))
+        console.log(Date.parse(sleepStart))
        // if(data.length == 1) {
        //     alert('One ' + String(data.length) + ' sleepy day found.')
        // } else {
        //     alert(String(data.length) + ' sleepy days found.')
        // }
-       datum = data[data.length - 1];
        $('#day').text(datum['sleep-startTime']['dateTime']);
        $('#bedtime').text(datum['sleep-startTime']['value']);
    }

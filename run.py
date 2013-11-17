@@ -145,8 +145,8 @@ def server():
 
         for j in range(len(date)):
             dtemp = date[j]
-            startTime[j] = [e['value'] for e in startTime_temp if e['dateTime'] == dtemp]
-            timeInBed[j] = [e['value'] for e in timeInBed_temp if e['dateTime'] == dtemp]
+            startTime[j] = [e['value'] for e in startTime if e['dateTime'] == dtemp]
+            timeInBed[j] = [e['value'] for e in timeInBed if e['dateTime'] == dtemp]
             timestamp = dtemp + ' ' + startTime[j][0]
             Tbed = datetime.strptime(timestamp, '%Y-%m-%d %H:%M')
             Tawake = Tbed + timedelta(minutes=int(timeInBed[j][0]))

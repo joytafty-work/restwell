@@ -160,13 +160,21 @@ def server():
             user_key=flask.session['FITBIT_TOKEN'], user_secret=flask.session['FITBIT_TOKEN_SECRET'])
         startTime = fb.time_series('sleep/startTime', period='max')
         timeInBed = fb.time_series('sleep/timeInBed', period='max')
+        minutesAsleep = fb.time_series('sleep/minutesAsleep', period='max')
         minutesAwake = fb.time_series('sleep/minutesAwake', period='max')
+        minutesAfterWakeup = fb.time_series('sleep/minutesAfterWakeup', period='max')
+        minutesToFallAsleep = fb.time_series('sleep/minutesToFallAsleep', period='max')
+        efficiency = fb.time_series('sleep/efficiency', period='max')
 
         data = {
             # only show if value != ''
             'sleep-startTime': [datum for datum in startTime['sleep-startTime'] if datum['value']],
             'sleep-timeInBed': [datum for datum in timeInBed['sleep-timeInBed'] if datum['value'] != '0'],
+            'sleep-minutesAsleep': [datum for datum in minutesAsleep['sleep-minutesAsleep'] if datum['value'] != '0'],
             'sleep-minutesAwake': [datum for datum in minutesAwake['sleep-minutesAwake'] if datum['value'] != '0'],
+            'sleep-minutesAfterWakeup': [datum for datum in minutesAfterWakeup['sleep-minutesAfterWakeup'] if datum['value'] != '0'],
+            'sleep-minutesToFallAsleep': [datum for datum in minutesToFallAsleep['sleep-minutesToFallAsleep'] if datum['value'] != '0'],
+            'sleep-efficiency': [datum for datum in efficiency['sleep-efficiency'] if datum['value'] != '0'],
         }
         return json.dumps(data)
     

@@ -97,39 +97,6 @@ def load():
 
 def old_auth():
     pass
-    # print "Request Token:"
-    # print "    - oauth_token        = %s" % request_token['oauth_token']
-    # print "    - oauth_token_secret = %s" % request_token['oauth_token_secret']
-    # print 
-    # 
-    # print "Go to the following link in your browser:"
-    # print "%s?oauth_token=%s" % (
-    #     'https://www.fitbit.com/oauth/authorize', 
-    #     request_token['oauth_token'])
-    # print 
-    # 
-    # accepted = 'n'
-    # while accepted.lower() == 'n':
-    #     accepted = raw_input('Have you authorized me? (y/n) ')
-    # oauth_verifier = raw_input('What is the PIN? ')
-    # 
-    # token = oauth.Token(
-    #     request_token['oauth_token'],
-    #     request_token['oauth_token_secret'])
-    # token.set_verifier(oauth_verifier)
-    # 
-    # client = oauth.Client(consumer, token)
-    # resp, content = client.request(
-    #     'https://api.fitbit.com/oauth/access_token', 
-    #     "POST")
-    # access_token = dict(urlparse.parse_qsl(content))
-    # 
-    # print "Access Token:"
-    # print "    - oauth_token        = %s" % access_token['oauth_token']
-    # print "    - oauth_token_secret = %s" % access_token['oauth_token_secret']
-    # print
-    # print "You may now access protected resources using the access tokens above." 
-    # print
 
 def server():
     from cherrypy import wsgiserver
@@ -166,17 +133,26 @@ def server():
         minutesToFallAsleep = fb.time_series('sleep/minutesToFallAsleep', period='max')
         efficiency = fb.time_series('sleep/efficiency', period='max')
 
-        data = {
+        startTime = {
             # only show if value != ''
             'sleep-startTime': [datum for datum in startTime['sleep-startTime'] if datum['value']],
-            'sleep-timeInBed': [datum for datum in timeInBed['sleep-timeInBed'] if datum['value'] != '0'],
-            'sleep-minutesAsleep': [datum for datum in minutesAsleep['sleep-minutesAsleep'] if datum['value'] != '0'],
-            'sleep-minutesAwake': [datum for datum in minutesAwake['sleep-minutesAwake'] if datum['value'] != '0'],
-            'sleep-minutesAfterWakeup': [datum for datum in minutesAfterWakeup['sleep-minutesAfterWakeup'] if datum['value'] != '0'],
-            'sleep-minutesToFallAsleep': [datum for datum in minutesToFallAsleep['sleep-minutesToFallAsleep'] if datum['value'] != '0'],
-            'sleep-efficiency': [datum for datum in efficiency['sleep-efficiency'] if datum['value'] != '0'],
-        }
-        return json.dumps(data)
+            }
+
+        for j in range(len(startTime)):
+            data['date'] = startTime['value']
+            data['sleep-startTime']
+
+        # data = {
+        #     # only show if value != ''
+        #     'sleep-startTime': [datum for datum in startTime['sleep-startTime'] if datum['value']],
+        #     'sleep-timeInBed': [datum for datum in timeInBed['sleep-timeInBed'] if datum['value'] != '0'],
+        #     'sleep-minutesAsleep': [datum for datum in minutesAsleep['sleep-minutesAsleep'] if datum['value'] != '0'],
+        #     'sleep-minutesAwake': [datum for datum in minutesAwake['sleep-minutesAwake'] if datum['value'] != '0'],
+        #     'sleep-minutesAfterWakeup': [datum for datum in minutesAfterWakeup['sleep-minutesAfterWakeup'] if datum['value'] != '0'],
+        #     'sleep-minutesToFallAsleep': [datum for datum in minutesToFallAsleep['sleep-minutesToFallAsleep'] if datum['value'] != '0'],
+        #     'sleep-efficiency': [datum for datum in efficiency['sleep-efficiency'] if datum['value'] != '0'],
+        # }
+        return json.dumps(startTime)
     
     @app.route('/')
     def index_html():

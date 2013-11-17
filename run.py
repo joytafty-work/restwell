@@ -139,6 +139,7 @@ def server():
             # only show if value != ''
             'sleep-startTime': [datum for datum in startTime['sleep-startTime'] if datum['value']],
             }
+        temp = temp['sleep-startTime']
         date = dict((t['dateTime'], i) for i, t in enumerate(temp))
         date = date.keys()
 

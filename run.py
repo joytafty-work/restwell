@@ -139,8 +139,8 @@ def server():
             'sleep-timeInBed': [datum for datum in timeInBed['sleep-timeInBed'] if datum['value'] != '0']
             }
 
-        data['date'] = temp['sleep-startTime']['dateTime']
-        data['sleep-startTime'] = temp['sleep-startTime']['value']
+        # data['date'] = temp['sleep-startTime']['dateTime']
+        # data['sleep-startTime'] = temp['sleep-startTime']['value']
 
         # for j in range(len(temp['sleep-startTime'])):
         #     dj = temp['sleep-startTime']['datetime'][j]

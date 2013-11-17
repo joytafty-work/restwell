@@ -145,12 +145,13 @@ def server():
 
         for j in range(len(date)):
             dtemp = date[j]
-            startTime[j] = [e['value'] for e in startTime_temp if e['dateTime'] == dtemp]
-            timeInBed[j] = [e['value'] for e in timeInBed_temp if e['dateTime'] == dtemp]
-            timestamp = dtemp + ' ' + startTime[j][0]
-            Tbed = datetime.strptime(timestamp, '%Y-%m-%d %H:%M')
-            Tawake = Tbed + timedelta(minutes=int(timeInBed[j][0]))
-            awakeTime.append([Tawake.strftime('%H:%M')])
+            startTime.append([e['value'] for e in startTime_temp if e['dateTime'] == dtemp])
+        print startTime
+            # timeInBed[j] = [e['value'] for e in timeInBed_temp if e['dateTime'] == dtemp]
+            # timestamp = dtemp + ' ' + startTime[j][0]
+            # Tbed = datetime.strptime(timestamp, '%Y-%m-%d %H:%M')
+            # Tawake = Tbed + timedelta(minutes=int(timeInBed[j][0]))
+            # awakeTime.append([Tawake.strftime('%H:%M')])
 
         # data['date'] = temp['sleep-startTime']['dateTime']
         # data['sleep-startTime'] = temp['sleep-startTime']['value']

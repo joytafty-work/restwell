@@ -138,9 +138,9 @@ def server():
             'sleep-startTime': [datum for datum in startTime['sleep-startTime'] if datum['value']],
             }
 
-        for j in range(len(startTime)):
-            data['date'] = startTime['value']
-            data['sleep-startTime']
+        # for j in range(len(startTime)):
+        #     startTime['date'] = startTime['value']
+        #     data['sleep-startTime']
 
         # data = {
         #     # only show if value != ''

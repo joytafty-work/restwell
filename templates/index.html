@@ -256,7 +256,7 @@ $.getJSON('/sleep/sleepRecord.json', function (data) {
        alert('No sleep recorded.  Please hold the Fitbit button before falling asleep.');
    } else {
         datum = data[data.length - 1];
-        console.log(datum['dateTime'])
+        console.log(type of datum['dateTime'])
         sleepDate = Date(datum['sleep-startTime']['dateTime'])
         sleepStart = datum['sleep-startTime']['value']
         console.log(Date.parse(sleepDate))

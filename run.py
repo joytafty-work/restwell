@@ -132,17 +132,28 @@ def server():
         minutesAfterWakeup = fb.time_series('sleep/minutesAfterWakeup', period='max')
         minutesToFallAsleep = fb.time_series('sleep/minutesToFallAsleep', period='max')
         efficiency = fb.time_series('sleep/efficiency', period='max')
+        
+        from datetime import datetime, timedelta
 
         temp = {
             # only show if value != ''
             'sleep-startTime': [datum for datum in startTime['sleep-startTime'] if datum['value']],
             }
-        temp = temp['sleep-startTime']
+        date = dict((t['dateTime'], i) for i, t in enumerate(temp))
+        date = date.keys()
 
-        data = {
-            'sleep-startTime': [datum for datum in startTime['sleep-startTime'] if datum['dateTime'] = temp['dateTime']]
-        }
-        for j in range(len(temp)):
+        for j in range(len(date)):
+            dtemp = date[j]
+            startTime[j] = [e['value'] for e in startTime_temp if e['dateTime'] == dtemp]
+            timeInBed[j] = [e['value'] for e in timeInBed_temp if e['dateTime'] == dtemp]
+            timestamp = dtemp + ' ' + startTime[j][0]
+            Tbed = datetime.strptime(timestamp, '%Y-%m-%d %H:%M')
+            Tawake = Tbed + timedelta(minutes=int(timeInBed[j][0]))
+            awakeTime.append([Tawake.strftime('%H:%M')])
+
+        # data['date'] = temp['sleep-startTime']['dateTime']
+        # data['sleep-startTime'] = temp['sleep-startTime']['value']
+
         # for j in range(len(temp['sleep-startTime'])):
         #     dj = temp['sleep-startTime']['datetime'][j]
         # data = {
@@ -155,7 +166,7 @@ def server():
         #     'sleep-minutesToFallAsleep': [datum for datum in minutesToFallAsleep['sleep-minutesToFallAsleep'] if datum['value'] != '0'],
         #     'sleep-efficiency': [datum for datum in efficiency['sleep-efficiency'] if datum['value'] != '0'],
         # }
-        return json.dumps(data)
+        return json.dumps(temp)
     
     @app.route('/')
     def index_html():

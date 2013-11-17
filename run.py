@@ -125,13 +125,13 @@ def server():
     def sleep_json():
         fb = fitbit.Fitbit(os.getenv('FITBIT_KEY'), os.getenv('FITBIT_SECRET'), 
             user_key=flask.session['FITBIT_TOKEN'], user_secret=flask.session['FITBIT_TOKEN_SECRET'])
-        startTime = fb.time_series('sleep/startTime', period='max')
-        timeInBed = fb.time_series('sleep/timeInBed', period='max')
-        minutesAsleep = fb.time_series('sleep/minutesAsleep', period='max')
-        minutesAwake = fb.time_series('sleep/minutesAwake', period='max')
-        minutesAfterWakeup = fb.time_series('sleep/minutesAfterWakeup', period='max')
-        minutesToFallAsleep = fb.time_series('sleep/minutesToFallAsleep', period='max')
-        efficiency = fb.time_series('sleep/efficiency', period='max')
+        startTime_temp = fb.time_series('sleep/startTime', period='max')
+        timeInBed_temp = fb.time_series('sleep/timeInBed', period='max')
+        minutesAsleep_temp = fb.time_series('sleep/minutesAsleep', period='max')
+        minutesAwake_temp = fb.time_series('sleep/minutesAwake', period='max')
+        minutesAfterWakeup_temp = fb.time_series('sleep/minutesAfterWakeup', period='max')
+        minutesToFallAsleep_temp = fb.time_series('sleep/minutesToFallAsleep', period='max')
+        efficiency_temp = fb.time_series('sleep/efficiency', period='max')
         
         from datetime import datetime, timedelta
 
@@ -145,8 +145,8 @@ def server():
 
         for j in range(len(date)):
             dtemp = date[j]
-            startTime[j] = [e['value'] for e in startTime if e['dateTime'] == dtemp]
-            timeInBed[j] = [e['value'] for e in timeInBed if e['dateTime'] == dtemp]
+            startTime[j] = [e['value'] for e in startTime_temp if e['dateTime'] == dtemp]
+            timeInBed[j] = [e['value'] for e in timeInBed_temp if e['dateTime'] == dtemp]
             timestamp = dtemp + ' ' + startTime[j][0]
             Tbed = datetime.strptime(timestamp, '%Y-%m-%d %H:%M')
             Tawake = Tbed + timedelta(minutes=int(timeInBed[j][0]))

@@ -162,6 +162,7 @@ def server():
         data = {
             # only show if value != ''
             'sleep-startTime': [datum for datum in data['sleep-startTime'] if datum['value']],
+            'sleep-timeInBed': [datum for datum in data['sleep-timeInBed'] if datum['value']],
         }
         return json.dumps(data)
     

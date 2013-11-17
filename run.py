@@ -133,15 +133,17 @@ def server():
         minutesToFallAsleep = fb.time_series('sleep/minutesToFallAsleep', period='max')
         efficiency = fb.time_series('sleep/efficiency', period='max')
 
-        startTime = {
+        temp = {
             # only show if value != ''
             'sleep-startTime': [datum for datum in startTime['sleep-startTime'] if datum['value']],
+            'sleep-timeInBed': [datum for datum in timeInBed['sleep-timeInBed'] if datum['value'] != '0']
             }
 
-        # for j in range(len(startTime)):
-        #     startTime['date'] = startTime['value']
-        #     data['sleep-startTime']
+        data['date'] = temp['sleep-startTime']['dateTime']
+        data['sleep-startTime'] = temp['sleep-startTime']['value']
 
+        # for j in range(len(temp['sleep-startTime'])):
+        #     dj = temp['sleep-startTime']['datetime'][j]
         # data = {
         #     # only show if value != ''
         #     'sleep-startTime': [datum for datum in startTime['sleep-startTime'] if datum['value']],
@@ -152,7 +154,7 @@ def server():
         #     'sleep-minutesToFallAsleep': [datum for datum in minutesToFallAsleep['sleep-minutesToFallAsleep'] if datum['value'] != '0'],
         #     'sleep-efficiency': [datum for datum in efficiency['sleep-efficiency'] if datum['value'] != '0'],
         # }
-        return json.dumps(startTime)
+        return json.dumps(temp)
     
     @app.route('/')
     def index_html():

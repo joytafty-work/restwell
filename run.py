@@ -154,16 +154,16 @@ def server():
         }
         return json.dumps(data)
 
-    @app.route('/sleep/timeInBed.json')
-    def sleep_json():
-        fb = fitbit.Fitbit(os.getenv('FITBIT_KEY'), os.getenv('FITBIT_SECRET'), 
-            user_key=flask.session['FITBIT_TOKEN'], user_secret=flask.session['FITBIT_TOKEN_SECRET'])
-        data = fb.time_series('sleep/timeInBed', period='max')
-        data = {
-            # only show if value != ''
-            'sleep-timeInBed': [datum for datum in data['sleep-timeInBed'] if datum['value']],
-        }
-        return json.dumps(data)
+    # @app.route('/sleep/timeInBed.json')
+    # def sleep_json():
+    #     fb = fitbit.Fitbit(os.getenv('FITBIT_KEY'), os.getenv('FITBIT_SECRET'), 
+    #         user_key=flask.session['FITBIT_TOKEN'], user_secret=flask.session['FITBIT_TOKEN_SECRET'])
+    #     data = fb.time_series('sleep/timeInBed', period='max')
+    #     data = {
+    #         # only show if value != ''
+    #         'sleep-timeInBed': [datum for datum in data['sleep-timeInBed'] if datum['value']],
+    #     }
+    #     return json.dumps(data)
     
     @app.route('/')
     def index_html():

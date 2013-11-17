@@ -160,10 +160,13 @@ def server():
             user_key=flask.session['FITBIT_TOKEN'], user_secret=flask.session['FITBIT_TOKEN_SECRET'])
         startTime = fb.time_series('sleep/startTime', period='max')
         timeInBed = fb.time_series('sleep/timeInBed', period='max')
+        minutesAwake = fb.time_series('sleep/minutesAwake', period='max')
+
         data = {
             # only show if value != ''
             'sleep-startTime': [datum for datum in startTime['sleep-startTime'] if datum['value']],
-            'sleep-timeInBed': [datum for datum in timeInBed['sleep-timeInBed'] if datum['value']],
+            'sleep-timeInBed': [datum for datum in timeInBed['sleep-timeInBed'] if datum['value'] != 0],
+            'sleep-minutesAwake': [datum for datum in minutesAwake['sleep-minutesAwake'] if datum['value'] != 0],
         }
         return json.dumps(data)
     

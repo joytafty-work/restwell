@@ -250,16 +250,16 @@
     </div> <!-- //container -->
     {% if fitbit_authenticated %}
 <script>
-$.getJSON('/sleep/sleepRecord.json', function (data) {
-   data = data['sleep-startTime'];
+$.getJSON('/sleep/sleepRecord.json', function (d) {
+   data = d['sleep-startTime'];
    if(data.length == 0) {
        alert('No sleep recorded.  Please hold the Fitbit button before falling asleep.');
    } else {
-        datum = data[data.length - 1];
-        console.log(datum)
-        console.log(typeof datum['sleep-startTime']['dateTime'])
-        sleepDate = Date(datum['sleep-startTime']['dateTime'])
-        sleepStart = datum['sleep-startTime']['value']
+        sleepStart = d[data.length - 1];
+        console.log(d)
+        console.log(typeof d['sleep-startTime']['dateTime'])
+        sleepDate = Date(d['sleep-startTime']['dateTime'])
+        sleepStart = d['sleep-startTime']['value']
         console.log(Date.parse(sleepDate))
         console.log(Date.parse(sleepStart))
        // if(data.length == 1) {

@@ -165,8 +165,8 @@ def server():
         data = {
             # only show if value != ''
             'sleep-startTime': [datum for datum in startTime['sleep-startTime'] if datum['value']],
-            'sleep-timeInBed': [datum for datum in timeInBed['sleep-timeInBed'] if datum['value'] != 0],
-            'sleep-minutesAwake': [datum for datum in minutesAwake['sleep-minutesAwake'] if datum['value'] != 0],
+            'sleep-timeInBed': [datum for datum in timeInBed['sleep-timeInBed'] if datum['value'] != '0'],
+            'sleep-minutesAwake': [datum for datum in minutesAwake['sleep-minutesAwake'] if datum['value'] != '0'],
         }
         return json.dumps(data)
     

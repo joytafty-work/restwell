@@ -137,7 +137,7 @@ def server():
 
         temp = {
             # only show if value != ''
-            'sleep-startTime': [datum for datum in startTime['sleep-startTime'] if datum['value']],
+            'sleep-startTime': [datum for datum in startTime_temp['sleep-startTime'] if datum['value']],
             }
         temp = temp['sleep-startTime']
         date = dict((t['dateTime'], i) for i, t in enumerate(temp))

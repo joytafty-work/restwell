@@ -148,6 +148,7 @@ def server():
         awakeTime = list(xrange(len(date)))
 
         for j in range(len(date)):
+            print j
             dtemp = date[j]
             startTime[j] = [e['value'] for e in startTime_temp if e['dateTime'] == dtemp]
             timeInBed[j] = [e['value'] for e in timeInBed_temp if e['dateTime'] == dtemp]

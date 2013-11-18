@@ -143,25 +143,25 @@ def server():
         date = dict((t['dateTime'], i) for i, t in enumerate(temp))
         date = date.keys()
 
-        startTime = list(xrange(len(date)))
-        timeInBed = list(xrange(len(date)))
-        awakeTime = list(xrange(len(date)))
+        # startTime = list(xrange(len(date)))
+        # timeInBed = list(xrange(len(date)))
+        # awakeTime = list(xrange(len(date)))
 
-        for j in range(len(date)):
-            print j
-            dtemp = date[j]
-            startTime[j] = [e['value'] for e in startTime_temp if e['dateTime'] == dtemp]
-            timeInBed[j] = [e['value'] for e in timeInBed_temp if e['dateTime'] == dtemp]
-            timestamp = dtemp + ' ' + startTime[j][0]
-            Tbed = datetime.strptime(timestamp, '%Y-%m-%d %H:%M')
-            Tawake = Tbed + timedelta(minutes=int(timeInBed[j][0]))
-            awakeTime[j] = [Tawake.strftime('%H:%M')]
+        # for j in range(len(date)):
+        #     print j
+        #     dtemp = date[j]
+        #     startTime[j] = [e['value'] for e in startTime_temp if e['dateTime'] == dtemp]
+        #     timeInBed[j] = [e['value'] for e in timeInBed_temp if e['dateTime'] == dtemp]
+        #     timestamp = dtemp + ' ' + startTime[j][0]
+        #     Tbed = datetime.strptime(timestamp, '%Y-%m-%d %H:%M')
+        #     Tawake = Tbed + timedelta(minutes=int(timeInBed[j][0]))
+        #     awakeTime[j] = [Tawake.strftime('%H:%M')]
 
-        data = {
-            'sleep-startTime': startTime,
-            'timeInBed': timeInBed, 
-            'awakeTime': awakeTime,
-        }
+        # data = {
+        #     'sleep-startTime': startTime,
+        #     'timeInBed': timeInBed, 
+        #     'awakeTime': awakeTime,
+        # }
         # data['date'] = temp['sleep-startTime']['dateTime']
         # data['sleep-startTime'] = temp['sleep-startTime']['value']
 
@@ -177,7 +177,7 @@ def server():
         #     'sleep-minutesToFallAsleep': [datum for datum in minutesToFallAsleep['sleep-minutesToFallAsleep'] if datum['value'] != '0'],
         #     'sleep-efficiency': [datum for datum in efficiency['sleep-efficiency'] if datum['value'] != '0'],
         # }
-        return json.dumps(data)
+        return json.dumps(temp)
     
     @app.route('/')
     def index_html():

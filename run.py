@@ -154,7 +154,7 @@ def server():
             timestamp = dtemp + ' ' + startTime[j][0]
             Tbed = datetime.strptime(timestamp, '%Y-%m-%d %H:%M')
             Tawake = Tbed + timedelta(minutes=int(timeInBed[j][0]))
-            awakeTime[j] = [Tawake.strftime('%H:%M')])
+            awakeTime[j] = [Tawake.strftime('%H:%M')]
 
         # data['date'] = temp['sleep-startTime']['dateTime']
         # data['sleep-startTime'] = temp['sleep-startTime']['value']

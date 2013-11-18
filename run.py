@@ -137,7 +137,7 @@ def server():
 
         dattemp = {
             # only show if value != ''
-            'sleep-startTime': [datum for datum in startTime_temp['sleep-startTime'] if datum['value']],
+            'sleep-startTime': [datum for datum in startTime_temp['sleep-startTime'] if datum['value']],            
             }
         temp = dattemp['sleep-startTime']
         date = dict((t['dateTime'], i) for i, t in enumerate(temp))
@@ -177,7 +177,7 @@ def server():
         #     'sleep-minutesToFallAsleep': [datum for datum in minutesToFallAsleep['sleep-minutesToFallAsleep'] if datum['value'] != '0'],
         #     'sleep-efficiency': [datum for datum in efficiency['sleep-efficiency'] if datum['value'] != '0'],
         # }
-        return json.dumps(temp)
+        return json.dumps(startTime_temp)
     
     @app.route('/')
     def index_html():

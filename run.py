@@ -135,11 +135,11 @@ def server():
         
         from datetime import datetime, timedelta
 
-        temp = {
+        dattemp = {
             # only show if value != ''
             'sleep-startTime': [datum for datum in startTime_temp['sleep-startTime'] if datum['value']],
             }
-        temp = temp['sleep-startTime']
+        temp = dattemp['sleep-startTime']
         date = dict((t['dateTime'], i) for i, t in enumerate(temp))
         date = date.keys()
 

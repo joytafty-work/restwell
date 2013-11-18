@@ -156,6 +156,11 @@ def server():
             Tawake = Tbed + timedelta(minutes=int(timeInBed[j][0]))
             awakeTime[j] = [Tawake.strftime('%H:%M')]
 
+        data = {
+            'sleep-startTime': startTime,
+            'timeInBed': timeInBed, 
+            'awakeTime': awakeTime,
+        }
         # data['date'] = temp['sleep-startTime']['dateTime']
         # data['sleep-startTime'] = temp['sleep-startTime']['value']
 
@@ -171,7 +176,7 @@ def server():
         #     'sleep-minutesToFallAsleep': [datum for datum in minutesToFallAsleep['sleep-minutesToFallAsleep'] if datum['value'] != '0'],
         #     'sleep-efficiency': [datum for datum in efficiency['sleep-efficiency'] if datum['value'] != '0'],
         # }
-        return json.dumps(temp)
+        return json.dumps(data)
     
     @app.route('/')
     def index_html():

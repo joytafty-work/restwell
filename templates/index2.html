@@ -72,14 +72,16 @@
     $.getJSON('/sleep/sleepRecord.json', function (d) {
         $.each(d.date, function (i, item) {
             console.log(item);
+            items.push('<li><a href="#">' + item + '</a></li>');
         })
     });
-    $('#selectdate').prepend($('<li/>', {
-    }).prepend($('<a/>', {
-        'href': '/sleep/sleepRecord.json', 
-        'data-transidion': 'slide', 
-        'text': 'hello'
-    })));
+    $('#selectdate').append(items.join(''));
+    // $('#selectdate').prepend($('<li/>', {
+    // }).prepend($('<a/>', {
+    //     'href': '/sleep/sleepRecord.json', 
+    //     'data-transidion': 'slide', 
+    //     'text': 'hello'
+    // })));
     </script>
 
     <!-- Load data for middle panel display -->

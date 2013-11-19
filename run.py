@@ -125,8 +125,8 @@ def server():
     def sleep_json():
         fb = fitbit.Fitbit(os.getenv('FITBIT_KEY'), os.getenv('FITBIT_SECRET'), 
             user_key=flask.session['FITBIT_TOKEN'], user_secret=flask.session['FITBIT_TOKEN_SECRET'])
-        startTime_temp = fb.time_series('sleep/startTime', period='max')
-        timeInBed_temp = fb.time_series('sleep/timeInBed', period='max')
+        startTime_temp = fb.time_series('sleep/startTime', period='max')['sleep-startTime']
+        timeInBed_temp = fb.time_series('sleep/timeInBed', period='max')['sleep-timeInBed']
         minutesAsleep_temp = fb.time_series('sleep/minutesAsleep', period='max')
         minutesAwake_temp = fb.time_series('sleep/minutesAwake', period='max')
         minutesAfterWakeup_temp = fb.time_series('sleep/minutesAfterWakeup', period='max')
@@ -135,11 +135,7 @@ def server():
         
         from datetime import datetime, timedelta
 
-        dattemp = {
-            # only show if value != ''
-            'sleep-startTime': [datum for datum in startTime_temp['sleep-startTime'] if datum['value']],            
-            }
-        temp = dattemp['sleep-startTime']
+        temp = [datum for datum in startTime_temp if datum['value']]
         date = dict((t['dateTime'], i) for i, t in enumerate(temp))
         date = date.keys()
 
@@ -177,7 +173,7 @@ def server():
         #     'sleep-minutesToFallAsleep': [datum for datum in minutesToFallAsleep['sleep-minutesToFallAsleep'] if datum['value'] != '0'],
         #     'sleep-efficiency': [datum for datum in efficiency['sleep-efficiency'] if datum['value'] != '0'],
         # }
-        return json.dumps(startTime_temp)
+        return json.dumps(temp)
     
     @app.route('/')
     def index_html():

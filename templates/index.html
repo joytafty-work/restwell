@@ -152,9 +152,8 @@
                         Switch Date <span class="caret"></span>
                       </button>
                       <ul class="dropdown-menu" role="menu" id="selectdate">
-                        <li><a href="#">Data</a></li>
-                        <li class="divider"></li>
                         <li><a href="#">View all data</a></li>
+                        <li class="divider"></li>
                       </ul>
                     </div>
                 </div>
@@ -253,6 +252,8 @@
 
     <!-- Load data for dropdown selector -->
     <script>
+    d = $.getJSON('/sleep/sleepRecord.json');
+    console.log(d.date);
     $('#selectdate').append($('<li/>', {
     }).append($('<a/>', {
         'href': '/sleep/sleepRecord.json', 
@@ -263,25 +264,25 @@
 
     <!-- Load data for middle panel display -->
     <script>
-    // $.getJSON('/sleep/sleepRecord.json', function (d) {
-    // data = d['bedTime'];
-    // if(data.length == 0) {
-    //    alert('No sleep recorded.  Please hold the Fitbit button before falling asleep.');
-    // } else {
-    //     l = d.date.length;
-    //     $('#day').text(d['date'][l-1]);
-    //     $('#bedtime').text(d['bedTime'][l-1]);
-    //     $('#awaketime').text(d['awakeTime'][l-1]);
-    //     if(d['timeInBed'][l-1] != undefined) {
-    //         hh_slduration = Math.floor(d['timeInBed'][l-1]/60);
-    //         mm_slduration = d['timeInBed'][l-1]%60;    
-    //         $('#slduration').text(hh_slduration + ' hr ' + mm_slduration + ' mins');
-    //         }
-    //     if(d['efficiency'][l-1] != undefined) {
-    //         $('#sleff').text(d['efficiency'][l-1] + ' %');
-    //         }
-    //     }
-    // });
+    $.getJSON('/sleep/sleepRecord.json', function (d) {
+    data = d['bedTime'];
+    if(data.length == 0) {
+       alert('No sleep recorded.  Please hold the Fitbit button before falling asleep.');
+    } else {
+        l = d.date.length;
+        $('#day').text(d['date'][l-1]);
+        $('#bedtime').text(d['bedTime'][l-1]);
+        $('#awaketime').text(d['awakeTime'][l-1]);
+        if(d['timeInBed'][l-1] != undefined) {
+            hh_slduration = Math.floor(d['timeInBed'][l-1]/60);
+            mm_slduration = d['timeInBed'][l-1]%60;    
+            $('#slduration').text(hh_slduration + ' hr ' + mm_slduration + ' mins');
+            }
+        if(d['efficiency'][l-1] != undefined) {
+            $('#sleff').text(d['efficiency'][l-1] + ' %');
+            }
+        }
+    });
 </script>
     {% endif %}
 

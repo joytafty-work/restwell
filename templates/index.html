@@ -262,6 +262,7 @@ $.getJSON('/sleep/sleepRecord.json', function (d) {
         $('#day').text(d['date'][l-1]);
         $('#bedtime').text(d['bedTime'][l-1]);
         $('#awaketime').text(d['awakeTime'][l-1]);
+        $('#sleff').text(d['efficiency'][l-1] + ' %');
    }
 });
 </script>

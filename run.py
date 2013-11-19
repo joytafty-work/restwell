@@ -177,6 +177,15 @@ def server():
         }
         env = Environment(loader=FileSystemLoader('templates'))
         return env.get_template('index.html').render(context)
+
+    @app.route('/debug')
+    def debug():
+        context = {
+            'fitbit_authenticated': 'FITBIT_TOKEN' in flask.session,
+        }
+        env = Environment(loader=FileSystemLoader('templates'))
+        return env.get_template('index2.html').render(context)
+
     
     @app.route('/logout')
     def logout():

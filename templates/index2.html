@@ -68,15 +68,14 @@
 
     <!-- Load data for dropdown selector -->
     <script>
-    var items = []; 
     $.getJSON('/sleep/sleepRecord.json', function (d) {
+        var items = []; 
         $.each(d.date, function (i, item) {
             items.push('<li><a href="#">' + item + '</a></li>');
         })
         console.log(items);
+        $('#selectdate').prepend(items.join(''));
     });
-    console.log(items);
-    $('#selectdate').prepend(items.join(''));
     // $('#selectdate').prepend($('<li/>', {
     // }).prepend($('<a/>', {
     //     'href': '/sleep/sleepRecord.json', 

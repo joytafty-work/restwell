@@ -71,11 +71,11 @@
     var items = []; 
     $.getJSON('/sleep/sleepRecord.json', function (d) {
         $.each(d.date, function (i, item) {
-            console.log(item);
             items.push('<li><a href="#">' + item + '</a></li>');
         })
     });
-    $('#selectdate').append(items.join(''));
+    console.log(items);
+    $('#selectdate').prepend(items.join(''));
     // $('#selectdate').prepend($('<li/>', {
     // }).prepend($('<a/>', {
     //     'href': '/sleep/sleepRecord.json', 

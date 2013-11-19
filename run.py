@@ -161,7 +161,7 @@ def server():
             'minutesAsleep': minutesAsleep,
             'minutesAwake': minutesAwake,
             'minutesAfterWakeup': minutesAfterWakeup,
-            'efficiency': efficiency
+            'efficiency': efficiency,
         }
         # data['date'] = temp['sleep-startTime']['dateTime']
         # data['sleep-startTime'] = temp['sleep-startTime']['value']

@@ -262,7 +262,7 @@ $.getJSON('/sleep/sleepRecord.json', function (d) {
         $('#bedtime').text(d['bedTime'][l-1]);
         $('#awaketime').text(d['awakeTime'][l-1]);
         if(d['timeInBed'][l-1] != undefined) {
-            hh_slduration = d['timeInBed'][l-1]/60;
+            hh_slduration = Math.floor(d['timeInBed'][l-1]/60);
             mm_slduration = d['timeInBed'][l-1]%60;    
             $('#slduration').text(hh_slduration + ' hr' + mm_slduration + ' mins');
         }

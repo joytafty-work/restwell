@@ -99,14 +99,6 @@
     <script src="../static/js/opentip.js"></script>
     <script src="http://momentjs.com/downloads/moment-timezone.min.js"></script>
     <script src="../static/js/moment-timezone-data.js"></script>
-    <script>
-    $.getJSON("data.json", function(d) {
-        tz = moment().tz(d[0].timezone).format("HH:mm A");
-        $("#topheader1").text(d[0].timezone);
-        $("#topheader2").text(tz);
-    });
-    </script>
-
     <!-- fetchSleep() -->
     <script type="text/javascript">
         function fetchSleep() {
@@ -154,25 +146,17 @@
         <div class ="row-fluid">
             <div class=".col-xs-12 .col-sm-6 .col-lg-8 panel2 panel2-default">
                 <div class="row">
-                    <i class="icon-time" style="color: #c3325f"> RestWell Score </i>
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+<!--                     <i class="icon-time" style="color: #c3325f"> RestWell Score </i>
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"> -->
                         Select data to display <span class="caret"></span>
                     </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">day1 </li>
-                        <li><a href="#">day2 </li>
-                        <li><a href="#">day3 </li>
-                        <li><a href="#">day4 </li>
-                        <li><a href="#">day5 </li>
-                        <li><a href="#">day6 </li>
-                        <li><a href="#">day7 </li>
-                    </ul>
-                    <button type="button" class="btn btn-default" 
+                    <ul id="selectdate"></ul>
+<!--                     <button type="button" class="btn btn-default" 
                         data-ot="load lastnight's data" data-ot-delay="0"
                         style="background-color: rgba(0, 0, 0, 0.05); border:0px" 
                         id="fetchsleep" onClick="fetchSleep()">
                         <span class="glyphicon glyphicon-repeat" style="color:#c3325f"></span>
-                     </button>                    
+                     </button>                     -->
                 </div>
                 <div class="row">
                    <h1num>87</h1num>
@@ -257,18 +241,26 @@
         </div><!-- //row -->
     </div> <!-- //container -->
     {% if fitbit_authenticated %}
-<script>
-$.getJSON('/sleep/sleepRecord.json', function (d) {
-   data = d['bedTime'];
-   if(data.length == 0) {
+    <!-- Load data for top panel display -->
+    <script>
+    $.getJSON("data.json", function(d) {
+        tz = moment().tz(d[0].timezone).format("HH:mm A");
+        $("#topheader1").text(d[0].timezone);
+        $("#topheader2").text(tz);
+    });
+    </script>
+    <!-- Load data for dropdown selector -->
+    <script>
+    $('#selectdate').append('<li><a>!hello!</a></li>').listview('refresh');
+    </script>
+
+    <!-- Load data for middle panel display -->
+    <script>
+    $.getJSON('/sleep/sleepRecord.json', function (d) {
+    data = d['bedTime'];
+    if(data.length == 0) {
        alert('No sleep recorded.  Please hold the Fitbit button before falling asleep.');
-   } else {
-       // $("#slduration").text(hr_slduration + "h " + min_slduration +"min");
-       // if(data.length == 1) {
-       //     alert('One ' + String(data.length) + ' sleepy day found.')
-       // } else {
-       //     alert(String(data.length) + ' sleepy days found.')
-       // }
+    } else {
         l = d.date.length;
         $('#day').text(d['date'][l-1]);
         $('#bedtime').text(d['bedTime'][l-1]);
@@ -277,12 +269,12 @@ $.getJSON('/sleep/sleepRecord.json', function (d) {
             hh_slduration = Math.floor(d['timeInBed'][l-1]/60);
             mm_slduration = d['timeInBed'][l-1]%60;    
             $('#slduration').text(hh_slduration + ' hr ' + mm_slduration + ' mins');
-        }
+            }
         if(d['efficiency'][l-1] != undefined) {
             $('#sleff').text(d['efficiency'][l-1] + ' %');
+            }
         }
-   }
-});
+    });
 </script>
     {% endif %}
 

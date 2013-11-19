@@ -100,8 +100,8 @@ def old_auth():
 
 def server():
     from cherrypy import wsgiserver
-    # app = Flask(__name__, static_folder=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static'))
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static'))
+    # app = Flask(__name__)
 
     @app.route('/data.json')
     # @crossdomain(origin='*')
@@ -154,14 +154,8 @@ def server():
 
         from itertools import izip
         sorted_list = sorted(izip(date, startTime, timeInBed, awakeTime, minutesToFallAsleep, minutesAsleep, minutesAwake, minutesAfterWakeup, efficiency), key=lambda x:x[0])
-        # sorted_list = sorted(izip(
-        #     date, startTime, timeInBed, awakeTime, 
-        #     minutesToFallAsleep, minutesAsleep, minutesAwake, 
-        #     minutesAfterWakeup, efficiency),
-        #     key=lambda x:x[0])
 
         date, bedTime, timeInBed, awakeTime, minutesToFallAsleep, minutesAsleep, minutesAwake, minutesAfterWakeup, efficiency = [[x[i] for x in sorted_list] for i in range(len(sorted_list[0]))]
-        # date, startTime, timeInBed, awakeTime, minutesToFallAsleep, minutesAsleep, minutesAwake, minutesAfterWakeup, efficiency = [[x[i] for x in sorted_list] for i in range(9)]
 
         data = {
             'date': date,
@@ -174,21 +168,6 @@ def server():
             'minutesAfterWakeup': minutesAfterWakeup,
             'efficiency': efficiency,
         }
-        # data['date'] = temp['sleep-startTime']['dateTime']
-        # data['sleep-startTime'] = temp['sleep-startTime']['value']
-
-        # for j in range(len(temp['sleep-startTime'])):
-        #     dj = temp['sleep-startTime']['datetime'][j]
-        # data = {
-        #     # only show if value != ''
-        #     'sleep-startTime': [datum for datum in startTime['sleep-startTime'] if datum['value']],
-        #     'sleep-timeInBed': [datum for datum in timeInBed['sleep-timeInBed'] if datum['value'] != '0'],
-        #     'sleep-minutesAsleep': [datum for datum in minutesAsleep['sleep-minutesAsleep'] if datum['value'] != '0'],
-        #     'sleep-minutesAwake': [datum for datum in minutesAwake['sleep-minutesAwake'] if datum['value'] != '0'],
-        #     'sleep-minutesAfterWakeup': [datum for datum in minutesAfterWakeup['sleep-minutesAfterWakeup'] if datum['value'] != '0'],
-        #     'sleep-minutesToFallAsleep': [datum for datum in minutesToFallAsleep['sleep-minutesToFallAsleep'] if datum['value'] != '0'],
-        #     'sleep-efficiency': [datum for datum in efficiency['sleep-efficiency'] if datum['value'] != '0'],
-        # }
         return json.dumps(data)
     
     @app.route('/')

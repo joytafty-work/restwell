@@ -241,11 +241,11 @@
     <!-- Load data for top panel display -->
 
     <script>
-    $.getJSON("/sleep/sleepRecord.json", function(d) {
-        tz = moment().tz(d[0].timezone).format("HH:mm A");
-        $("#topheader1").text(d[0].timezone);
-        $("#topheader2").text(tz);
-    });
+    // $.getJSON("/sleep/sleepRecord.json", function(d) {
+    //     tz = moment().tz(d[0].timezone).format("HH:mm A");
+    //     $("#topheader1").text(d[0].timezone);
+    //     $("#topheader2").text(tz);
+    // });
     </script>
 
     <!-- Load data for dropdown selector -->
@@ -253,7 +253,7 @@
     $.getJSON('/sleep/sleepRecord.json', function (d) {
         var items = []; 
         $.each(d.date, function (i, item) {
-            items.push('<li onclick="$('#selectdate').val('store'); $('#selectdate').submit()><a href="#">' + item + '</a></li>');
+            items.push('<li onclick="$('#selectdate').val('store');><a href="#">' + item + '</a></li>');
         })
         $('#selectdate').prepend(items.join(''));
     });

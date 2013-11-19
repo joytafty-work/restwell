@@ -152,6 +152,18 @@ def server():
             minutesAfterWakeup = [e['value'] for e in minutesAfterWakeup_temp if e['dateTime'] == dtemp]
             efficiency = [e['value'] for e in efficiency_temp if e['dateTime'] == dtemp]
 
+        from itertools import izip
+        sorted_list = sorted(izip(
+            date, startTime, timeInBed, awakeTime, 
+            minutesToFallAsleep, minutesAsleep, minutesAwake, 
+            minutesAfterWakeup, efficiency),
+            key=lambda x:x[0])
+
+        date, startTime, timeInBed, awakeTime, 
+        minutesToFallAsleep, minutesAsleep, minutesAwake, 
+        minutesAfterWakeup, efficiency 
+        = [[x[i] for x in sorted_list] for i in range(len(sorted_list[0]))]
+
         data = {
             'date': date,
             'bedTime': startTime,

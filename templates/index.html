@@ -143,35 +143,18 @@
         <h3 class="margin-base-vertical" id="topheader2"></h3>
     </main>
     </div>
-<!--     <div class="container">
-        <div class="btn-group dropup">
-            <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" href="#">
-            Action <span class="caret"></span>
-            </button>
-                <ul class="dropdown-menu" role="menu" href="#">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
-                </ul>
-        </div>
-    </div>
- -->
     <div class="container">
         <div class ="row-fluid">
             <div class=".col-xs-12 .col-sm-6 .col-lg-8 panel2 panel2-default">
                 <div class="row">
                     <div class="btn-group dropup">
                       <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" href="#">
-                        Action <span class="caret"></span>
+                        Switch Date <span class="caret"></span>
                       </button>
-                      <ul class="dropdown-menu" role="menu" href="#">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
+                      <ul class="dropdown-menu" role="menu" id="selectdate">
+                        <li><a href="#">Data</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
+                        <li><a href="#">View all data</a></li>
                       </ul>
                     </div>
                 </div>
@@ -270,12 +253,12 @@
 
     <!-- Load data for dropdown selector -->
     <script>
-    // $('#selectdate').prepend($('<li/>', {
-    // }).prepend($('<a/>', {
-    //     'href': '/sleep/sleepRecord.json', 
-    //     'data-transidion': 'slide', 
-    //     'text': 'hello'
-    // })));
+    $('#selectdate').append($('<li/>', {
+    }).append($('<a/>', {
+        'href': '/sleep/sleepRecord.json', 
+        'data-transidion': 'slide', 
+        'text': 'hello'
+    })));
     </script>
 
     <!-- Load data for middle panel display -->

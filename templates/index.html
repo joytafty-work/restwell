@@ -159,7 +159,7 @@
                       </button>
                       <ul class="dropdown-menu" role="menu" id="selectdate" style="panel2 panel2-default">
                       <script type="text/javascript">
-                        c = $(this).attr('chosen');
+                        c = $(this).data('date');
                         console.log(c);
                       </script>
                         <li class="divider"></li>
@@ -257,9 +257,10 @@
     $.getJSON('/sleep/sleepRecord.json', function (d) {
         var items = []; 
         $.each(d.date, function (i, item) {
-            pushstr = "<li onclick=" + "$('#selectdate').val('chosen'); $('#selectdate').submit()>" + "<a href='#'>" + item + "</a></li>";
+            pushstr = "<li onclick=" + "$('#selectdate').data('date', 'value'); $('#selectdate').submit()>" + item + "</li>";
             console.log(pushstr);
-            items.push("<li onclick=" + "$('#selectdate').val('chosen'); $('#selectdate').submit()>" + "<a href='#'>" + item + "</a></li>");
+            // items.push("<li onclick=" + "$('#selectdate').val('chosen'); $('#selectdate').submit()>" + "<a href='#'>" + item + "</a></li>");
+            items.push(pushstr);
         })
         $('#selectdate').prepend(items.join(''));
     });

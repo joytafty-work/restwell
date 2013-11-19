@@ -142,6 +142,8 @@ def server():
         startTime = list(xrange(len(date)))
         timeInBed = list(xrange(len(date)))
         awakeTime = list(xrange(len(date)))
+        minutesAsleep = list(xrange(len(date)))
+        minutesToFallAsleep = list(xrange(len(date)))
 
         for j in range(len(date)):
             print j

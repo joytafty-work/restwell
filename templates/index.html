@@ -253,7 +253,7 @@
     $.getJSON('/sleep/sleepRecord.json', function (d) {
         var items = []; 
         $.each(d.date, function (i, item) {
-            items.push('<li onclick="$('#selectdate').val('store');><a href="#">' + item + '</a></li>');
+            items.push("<li onclick=" + "$('#selectdate');>" + "<a href='#'>" + item + "</a></li>");
         })
         $('#selectdate').prepend(items.join(''));
     });

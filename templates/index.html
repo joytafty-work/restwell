@@ -261,9 +261,9 @@ $.getJSON('/sleep/sleepRecord.json', function (d) {
         $('#day').text(d['date'][l-1]);
         $('#bedtime').text(d['bedTime'][l-1]);
         $('#awaketime').text(d['awakeTime'][l-1]);
-        if(d['duration'][l-1] != undefined) {
-            hh_slduration = d['duration'][l-1]/60;
-            mm_slduration = d['duration'][l-1]%60    
+        if(d['timeInBed'][l-1] != undefined) {
+            hh_slduration = d['timeInBed'][l-1]/60;
+            mm_slduration = d['timeInBed'][l-1]%60;    
             $('#slduration').text(hh_slduration + ' hr' + mm_slduration + ' mins');
         }
         if(d['efficiency'][l-1] != undefined) {

@@ -247,7 +247,7 @@
     {% if fitbit_authenticated %}
 <script>
 $.getJSON('/sleep/sleepRecord.json', function (d) {
-   data = d['sleep-startTime'];
+   data = d['bedTime'];
    if(data.length == 0) {
        alert('No sleep recorded.  Please hold the Fitbit button before falling asleep.');
    } else {

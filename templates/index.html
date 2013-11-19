@@ -252,16 +252,16 @@
 
     <!-- Load data for dropdown selector -->
     <script>
-    d = $.getJSON('/sleep/sleepRecord.json');
-    console.log(d);
-    console.log(d.responseJSON);
-    console.log(d['responseJSON']);
-    $('#selectdate').append($('<li/>', {
-    }).append($('<a/>', {
-        'href': '/sleep/sleepRecord.json', 
-        'data-transidion': 'slide', 
-        'text': 'hello'
-    })));
+    $.getJSON('/sleep/sleepRecord.json', function (d) {
+        console.log(d);
+        $('#selectdate').append($('<li/>', {
+        }).append($('<a/>', {
+            'href': '/sleep/sleepRecord.json', 
+            'data-transidion': 'slide', 
+            'text': '!hello!'
+        })));
+    });
+
     </script>
 
     <!-- Load data for middle panel display -->

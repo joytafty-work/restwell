@@ -149,8 +149,8 @@ def server():
             minutesToFallAsleep[j] = [e['value'] for e in minutesToFallAsleep_temp if e['dateTime'] == dtemp]
             minutesAsleep[j] = [e['value'] for e in minutesAsleep_temp if e['dateTime'] == dtemp]
             minutesAwake[j] = [e['value'] for e in minutesAwake_temp if e['dateTime'] == dtemp]
-            minutesAfterWakeup = [e['value'] for e in minutesAfterWakeup_temp if e['dateTime'] == dtemp]
-            efficiency = [e['value'] for e in efficiency_temp if e['dateTime'] == dtemp]
+            minutesAfterWakeup[j] = [e['value'] for e in minutesAfterWakeup_temp if e['dateTime'] == dtemp]
+            efficiency[j] = [e['value'] for e in efficiency_temp if e['dateTime'] == dtemp]
 
         from itertools import izip
         sorted_list = sorted(izip(date, startTime, timeInBed, awakeTime, minutesToFallAsleep, minutesAsleep, minutesAwake, minutesAfterWakeup, efficiency), key=lambda x:x[0])

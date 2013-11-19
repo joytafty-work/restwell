@@ -26,17 +26,14 @@
                 <ul class="dropdown-menu" role="menu" href="#">
                     <li><a href="#">Action</a></li>
                     <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
                     <li class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
+                    <li><a href="#" id="addInputs">Separated link</a></li>
                 </ul>
         </div>
 
         <form action="" id="form_list" method="get">
            <div id="inputList">
               <p><input class="textInput" name="input_1"  id="input_1" type="text" /></p>
-              <p><input class="textInput" name="input_2"  id="input_2" type="text" /></p>
-              <p><input class="textInput" name="input_3"  id="input_3" type="text" /></p>
             </div>
             <p><input name="addInputs" id="addInputs" type="submit" value="Add input items" /></p>
            </form>
@@ -66,7 +63,6 @@
             });
     
         });
-     event.preventDefault();
 
      function addInputEl(){
          inCon = document.getElementById('inputList');

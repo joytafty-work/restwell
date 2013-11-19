@@ -182,7 +182,7 @@
                     <!-- <div class=".col-xs-12 col-xs-offset-4 .col-sm-2 col-sm-offset-1"> -->
                     <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
                         <p>Sleep Efficiency</p>
-                        <h4 id="slqual">93 %</h4>
+                        <h4 id="sleff">93 %</h4>
                     </div>
                     <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
                         <p>Sleep Duration</p>
@@ -255,20 +255,18 @@ $.getJSON('/sleep/sleepRecord.json', function (d) {
    if(data.length == 0) {
        alert('No sleep recorded.  Please hold the Fitbit button before falling asleep.');
    } else {
-        sleepStart = d[data.length - 1];
-        console.log(d)
-        console.log(typeof d['sleep-startTime']['dateTime'])
-        sleepDate = Date(d['sleep-startTime']['dateTime'])
-        sleepStart = d['sleep-startTime']['value']
-        console.log(Date.parse(sleepDate))
-        console.log(Date.parse(sleepStart))
+       // $("#slduration").text(hr_slduration + "h " + min_slduration +"min");
        // if(data.length == 1) {
        //     alert('One ' + String(data.length) + ' sleepy day found.')
        // } else {
        //     alert(String(data.length) + ' sleepy days found.')
        // }
-       $('#day').text(datum['sleep-startTime']['dateTime']);
-       $('#bedtime').text(datum['sleep-startTime']['value']);
+       console.log(d);
+       console.log(length(d));
+       console.log(length(d.date));
+       $('#day').text(d['date'][length(d.date)-1]);
+       $('#bedtime').text(d['sleep-startTime']);
+       $('#awaketime').text(d['awaketime'])
    }
 });
 </script>

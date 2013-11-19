@@ -127,11 +127,11 @@ def server():
             user_key=flask.session['FITBIT_TOKEN'], user_secret=flask.session['FITBIT_TOKEN_SECRET'])
         startTime_temp = fb.time_series('sleep/startTime', period='max')['sleep-startTime']
         timeInBed_temp = fb.time_series('sleep/timeInBed', period='max')['sleep-timeInBed']
-        minutesAsleep_temp = fb.time_series('sleep/minutesAsleep', period='max')
-        minutesAwake_temp = fb.time_series('sleep/minutesAwake', period='max')
-        minutesAfterWakeup_temp = fb.time_series('sleep/minutesAfterWakeup', period='max')
-        minutesToFallAsleep_temp = fb.time_series('sleep/minutesToFallAsleep', period='max')
-        efficiency_temp = fb.time_series('sleep/efficiency', period='max')
+        minutesAsleep_temp = fb.time_series('sleep/minutesAsleep', period='max')['sleep-minutesAsleep']
+        minutesAwake_temp = fb.time_series('sleep/minutesAwake', period='max')['sleep-minutesAwake']
+        minutesAfterWakeup_temp = fb.time_series('sleep/minutesAfterWakeup', period='max')['sleep-minutesAfterWakeup']
+        minutesToFallAsleep_temp = fb.time_series('sleep/minutesToFallAsleep', period='max')['sleep-minutesToFallAsleep']
+        efficiency_temp = fb.time_series('sleep/efficiency', period='max')['sleep-efficiency']
         
         from datetime import datetime, timedelta
 
@@ -152,11 +152,15 @@ def server():
             Tbed = datetime.strptime(timestamp, '%Y-%m-%d %H:%M')
             Tawake = Tbed + timedelta(minutes=int(timeInBed[j][0]))
             awakeTime[j] = [Tawake.strftime('%H:%M')]
+            minutesAsleep[j] = [e['value'] for e in minutesAsleep_temp if e['dateTime'] == dtemp]
+            minutesToFallAsleep[j] = [e['value'] for e in minutesToFallAsleep_temp if e['dateTime'] == dtemp]
 
         data = {
             'sleep-startTime': startTime,
             'timeInBed': timeInBed, 
             'awakeTime': awakeTime,
+            'minutesAsleep': minutesAsleep,
+            'minutesToFallAsleep': minutesToFallAsleep,
         }
         # data['date'] = temp['sleep-startTime']['dateTime']
         # data['sleep-startTime'] = temp['sleep-startTime']['value']

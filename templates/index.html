@@ -253,6 +253,8 @@
     <!-- Load data for dropdown selector -->
     <script>
     d = $.getJSON('/sleep/sleepRecord.json');
+    console.log(d);
+    console.log(d.responseJSON);
     console.log(d['responseJSON']);
     $('#selectdate').append($('<li/>', {
     }).append($('<a/>', {

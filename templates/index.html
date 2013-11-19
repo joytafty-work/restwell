@@ -152,7 +152,7 @@
                         Switch Date <span class="caret"></span>
                       </button>
                       <ul class="dropdown-menu" role="menu" id="selectdate">
-                        <li><a href="#">View all data</a></li>
+                        <li><a href="'/sleep/sleepRecord.json'">view all</a></li>
                         <li class="divider"></li>
                       </ul>
                     </div>
@@ -253,7 +253,7 @@
     <!-- Load data for dropdown selector -->
     <script>
     $.getJSON('/sleep/sleepRecord.json', function (d) {
-        console.log(d);
+        console.log(d['date']);
         $('#selectdate').append($('<li/>', {
         }).append($('<a/>', {
             'href': '/sleep/sleepRecord.json', 

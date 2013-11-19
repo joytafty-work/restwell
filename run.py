@@ -154,7 +154,7 @@ def server():
 
         data = {
             'date': date,
-            'sleep-startTime': startTime,
+            'bedTime': startTime,
             'timeInBed': timeInBed, 
             'awakeTime': awakeTime,
             'minutesToFallAsleep': minutesToFallAsleep,

@@ -261,7 +261,7 @@ $.getJSON('/sleep/sleepRecord.json', function (d) {
        // } else {
        //     alert(String(data.length) + ' sleepy days found.')
        // }
-        l = d.date.length);
+        l = d.date.length;
         console.log(d['date'][l-1]);
         $('#day').text(d['date'][l-1]);
         $('#bedtime').text(d['sleep-startTime'][l-1]);

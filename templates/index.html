@@ -101,7 +101,7 @@
     <script src="../static/js/moment-timezone-data.js"></script>
     <script>
     $.getJSON("data.json", function(d) {
-        tz = moment().tz(d[0].timezone).format("HH:mm A");                                
+        tz = moment().tz(d[0].timezone).format("HH:mm A");
         $("#topheader1").text(d[0].timezone);
         $("#topheader2").text(tz);
     });
@@ -155,6 +155,18 @@
             <div class=".col-xs-12 .col-sm-6 .col-lg-8 panel2 panel2-default">
                 <div class="row">
                     <i class="icon-time" style="color: #c3325f"> RestWell Score </i>
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        Select data to display <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">day1 </li>
+                        <li><a href="#">day2 </li>
+                        <li><a href="#">day3 </li>
+                        <li><a href="#">day4 </li>
+                        <li><a href="#">day5 </li>
+                        <li><a href="#">day6 </li>
+                        <li><a href="#">day7 </li>
+                    </ul>
                     <button type="button" class="btn btn-default" 
                         data-ot="load lastnight's data" data-ot-delay="0"
                         style="background-color: rgba(0, 0, 0, 0.05); border:0px" 

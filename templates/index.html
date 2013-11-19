@@ -158,8 +158,8 @@
                         Switch Date <span class="caret"></span>
                       </button>
                       <ul class="dropdown-menu" role="menu" id="selectdate" style="panel2 panel2-default">
-                        <li><a href="/sleep/sleepRecord.json">view all</a></li>
                         <li class="divider"></li>
+                        <li><a href="/sleep/sleepRecord.json">view all</a></li>
                       </ul>
                     </div>
                 </div>
@@ -203,7 +203,6 @@
                 <div class="row-fluid">
                     <div class=".col-xs-6 col-xs-offset-4 .col-sm-3 col-sm-offset-6">
                         <form>
-                        <p class="help-block text-center"><small>Select Your Device</small></p>
                         <p class="text-center">
                             {% if fitbit_authenticated %}
                             <a type="submit" class="btn btn-success" href="/logout">Logout Fitbit</a>
@@ -254,7 +253,7 @@
     $.getJSON('/sleep/sleepRecord.json', function (d) {
         var items = []; 
         $.each(d.date, function (i, item) {
-            items.push('<li><a href="#">' + item + '</a></li>');
+            items.push('<li onclick="$('#selectdate').val('store'); $('#selectdate').submit()><a href="#">' + item + '</a></li>');
         })
         $('#selectdate').prepend(items.join(''));
     });

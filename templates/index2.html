@@ -31,35 +31,94 @@
                     <li><a href="#">Separated link</a></li>
                 </ul>
         </div>
+
+        <form action="" id="form_list" method="get">
+           <div id="inputList">
+              <p><input class="textInput" name="input_1"  id="input_1" type="text" /></p>
+              <p><input class="textInput" name="input_2"  id="input_2" type="text" /></p>
+              <p><input class="textInput" name="input_3"  id="input_3" type="text" /></p>
+            </div>
+            <p><input name="addInputs" id="addInputs" type="submit" value="Add input items" /></p>
+           </form>
+           <ul id="update_list">
+           </ul>
     </div>
 
-<!--     <div class="container">
-        <div class ="row-fluid">
-            <div class=".col-xs-12 .col-sm-6 .col-lg-8 panel2 panel2-default">
-                <div class="row-fluid">
-                    <div class="btn-group dropup">
-                      <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" href="#">
-                        Action <span class="caret"></span>
-                      </button>
-                      <ul class="dropdown-menu" role="menu" href="#">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                      </ul>
-                    </div>
-                </div>
-                <div class="row">
-                   <h1num>87</h1num>
-                </div>
-            </div>
-        </div>
-    </div>
- -->
     {% if fitbit_authenticated %}
     <!-- Load data for top panel display -->
 
+    <script>
+    $(document).ready(function(){
+            
+            $('#addInputs').click(function(event){
+                    event.preventDefault();
+                    addInputEl() ;
+            });
+            
+            $('.textInput').live('blur', function(e) {
+                prodCode = this.value;
+                    addElement(prodCode) ;
+            });
+            
+            $('.textInput').live('focus', function(e) {
+                    prodCode = this.value;
+                    checkElement(prodCode) ;
+            });
+    
+        });
+     event.preventDefault();
+
+     function addInputEl(){
+         inCon = document.getElementById('inputList');
+         newP = document.createElement('p');
+         newInput = document.createElement('input');
+         newInput.setAttribute('class', 'textInput');
+         newInput.setAttribute('type', 'text');
+                     
+         newP.appendChild(newInput);
+         inCon.appendChild(newP);
+     }
+
+     function addElement(code) {
+                 pCd = code;
+             if(pCd === ""){
+                 }   else{           
+                     list = document.getElementById('update_list');
+                     newLi= document.createElement('li');
+                     hTag= document.createElement('h1');
+                     midTag= document.createElement('p');
+                     botTag= document.createElement('p');
+                     midATag= document.createElement('a');
+                     botATag= document.createElement('a');
+                     
+                     newLi.setAttribute('id','prod_'+pCd);           
+                     midATag.setAttribute('href','http://www.my-html-codes.com?id='+pCd);
+                     botATag.setAttribute('href','http://www.my-html-codes.com?id='+pCd);
+                     
+                     midATag.innerHTML = 'Check for alternatives';
+                     botATag.innerHTML = 'Check for accessories';
+                     hTag.innerHTML = 'Product: '+pCd;
+                     midTag.appendChild(midATag);
+                     botTag.appendChild(botATag);
+                     newLi.appendChild(hTag);
+                     newLi.appendChild(midTag);
+                     newLi.appendChild(botTag);
+                     list.appendChild(newLi);
+                 }
+             }
+
+    function checkElement(code) {
+        pCd = code;
+        if(pCd === ""){
+        }else{  
+            prodId = 'prod_'+pCd;
+            cld = document.getElementById(prodId);
+                    pt = document.getElementById('update_list');
+                    pt.removeChild(cld);
+            }
+        }
+
+    </script>
     <script>
     // $.getJSON("data.json", function(d) {
     //     tz = moment().tz(d[0].timezone).format("HH:mm A");

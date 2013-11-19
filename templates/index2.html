@@ -73,6 +73,7 @@
         $.each(d.date, function (i, item) {
             items.push('<li><a href="#">' + item + '</a></li>');
         })
+        console.log(items);
     });
     console.log(items);
     $('#selectdate').prepend(items.join(''));

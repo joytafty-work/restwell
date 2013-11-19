@@ -176,7 +176,7 @@ def server():
             'fitbit_authenticated': 'FITBIT_TOKEN' in flask.session,
         }
         env = Environment(loader=FileSystemLoader('templates'))
-        return env.get_template('index2.html').render(context)
+        return env.get_template('index.html').render(context)
     
     @app.route('/logout')
     def logout():
@@ -220,7 +220,7 @@ def server():
         context = {
         }
         env = Environment(loader=FileSystemLoader('templates'))
-        return env.get_template('index2.html').render(context)
+        return env.get_template('index.html').render(context)
 
     print 'Listening :8001...'
     d = wsgiserver.WSGIPathInfoDispatcher({'/': app})

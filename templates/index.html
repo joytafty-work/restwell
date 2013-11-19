@@ -251,7 +251,13 @@
     </script>
     <!-- Load data for dropdown selector -->
     <script>
-    $('#selectdate').append('<li><a>!hello!</a></li>').listview('refresh');
+    $('#selectdate').append($('<li/>', {
+    }).append($('<a/>', {
+        'href': '/sleep/sleepRecord.json', 
+        'data-transidion': 'slide', 
+        'text': 'hello'
+    })));
+    $('#selectdate').listview('refresh');
     </script>
 
     <!-- Load data for middle panel display -->

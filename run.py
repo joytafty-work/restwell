@@ -110,17 +110,6 @@ def server():
             list(redis.smembers('fitbit'))])
         return s
 
-    # @app.route('/sleep/startTime.json')
-    # def sleep_json():
-    #     fb = fitbit.Fitbit(os.getenv('FITBIT_KEY'), os.getenv('FITBIT_SECRET'), 
-    #         user_key=flask.session['FITBIT_TOKEN'], user_secret=flask.session['FITBIT_TOKEN_SECRET'])
-    #     data = fb.time_series('sleep/startTime', period='max')
-    #     data = {
-    #         # only show if value != ''
-    #         'sleep-startTime': [datum for datum in data['sleep-startTime'] if datum['value']],
-    #     }
-    #     return json.dumps(data)
-
     @app.route('/sleep/sleepRecord.json')
     def sleep_json():
         fb = fitbit.Fitbit(os.getenv('FITBIT_KEY'), os.getenv('FITBIT_SECRET'), 
@@ -142,8 +131,11 @@ def server():
         startTime = list(xrange(len(date)))
         timeInBed = list(xrange(len(date)))
         awakeTime = list(xrange(len(date)))
-        minutesAsleep = list(xrange(len(date)))
         minutesToFallAsleep = list(xrange(len(date)))
+        minutesAsleep = list(xrange(len(date)))
+        minutesAwake = list(xrange(len(date)))
+        minutesAfterWakeup = list(xrange(len(date)))
+        efficiency = list(xrange(len(date))) 
 
         for j in range(len(date)):
             print j
@@ -154,15 +146,22 @@ def server():
             Tbed = datetime.strptime(timestamp, '%Y-%m-%d %H:%M')
             Tawake = Tbed + timedelta(minutes=int(timeInBed[j][0]))
             awakeTime[j] = [Tawake.strftime('%H:%M')]
-            minutesAsleep[j] = [e['value'] for e in minutesAsleep_temp if e['dateTime'] == dtemp]
             minutesToFallAsleep[j] = [e['value'] for e in minutesToFallAsleep_temp if e['dateTime'] == dtemp]
+            minutesAsleep[j] = [e['value'] for e in minutesAsleep_temp if e['dateTime'] == dtemp]
+            minutesAwake[j] = [e['value'] for e in minutesAwake_temp if e['dateTime'] == dtemp]
+            minutesAfterWakeup = [e['value'] for e in minutesAfterWakeup_temp if e['dateTime'] == dtemp]
+            efficiency = [e['value'] for e in efficiency_temp if e['dateTime'] == dtemp]
 
         data = {
+            'date': date,
             'sleep-startTime': startTime,
             'timeInBed': timeInBed, 
             'awakeTime': awakeTime,
-            'minutesAsleep': minutesAsleep,
             'minutesToFallAsleep': minutesToFallAsleep,
+            'minutesAsleep': minutesAsleep,
+            'minutesAwake': minutesAwake,
+            'minutesAfterWakeup': minutesAfterWakeup,
+            'efficiency': efficiency
         }
         # data['date'] = temp['sleep-startTime']['dateTime']
         # data['sleep-startTime'] = temp['sleep-startTime']['value']

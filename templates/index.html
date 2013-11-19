@@ -158,6 +158,10 @@
                         Switch Date <span class="caret"></span>
                       </button>
                       <ul class="dropdown-menu" role="menu" id="selectdate" style="panel2 panel2-default">
+                      <script type="text/javascript">
+                        c = $(this).attr('chosen');
+                        console.log(c);
+                      </script>
                         <li class="divider"></li>
                         <li><a href="/sleep/sleepRecord.json">view all</a></li>
                       </ul>
@@ -253,7 +257,7 @@
     $.getJSON('/sleep/sleepRecord.json', function (d) {
         var items = []; 
         $.each(d.date, function (i, item) {
-            items.push("<li onclick=" + "$('#selectdate');>" + "<a href='#'>" + item + "</a></li>");
+            items.push("<li onclick=" + "$('#selectdate').value('chosen');>" + "<a href='#'>" + item + "</a></li>");
         })
         $('#selectdate').prepend(items.join(''));
     });

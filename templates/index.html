@@ -257,7 +257,9 @@
     $.getJSON('/sleep/sleepRecord.json', function (d) {
         var items = []; 
         $.each(d.date, function (i, item) {
-            items.push("<li onclick=" + "$('#selectdate').value('chosen');>" + "<a href='#'>" + item + "</a></li>");
+            pushstr = "<li onclick=" + "$('#selectdate').val('chosen'); $('#selectdate').submit()>" + "<a href='#'>" + item + "</a></li>";
+            console.log(pushstr);
+            items.push("<li onclick=" + "$('#selectdate').val('chosen'); $('#selectdate').submit()>" + "<a href='#'>" + item + "</a></li>");
         })
         $('#selectdate').prepend(items.join(''));
     });

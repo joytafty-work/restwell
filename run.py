@@ -159,11 +159,12 @@ def server():
             minutesAfterWakeup, efficiency),
             key=lambda x:x[0])
 
-        date, startTime, timeInBed, awakeTime, minutesToFallAsleep, minutesAsleep, minutesAwake, minutesAfterWakeup, efficiency = [[x[i] for x in sorted_list] for i in range(9)]
+        date, bedTime, timeInBed, awakeTime = [[x[i] for x in sorted_list] for i in range(len(sorted_list[0]))]
+        # date, startTime, timeInBed, awakeTime, minutesToFallAsleep, minutesAsleep, minutesAwake, minutesAfterWakeup, efficiency = [[x[i] for x in sorted_list] for i in range(9)]
 
         data = {
             'date': date,
-            'bedTime': startTime,
+            'bedTime': bedTime,
             'timeInBed': timeInBed, 
             'awakeTime': awakeTime,
             'minutesToFallAsleep': minutesToFallAsleep,

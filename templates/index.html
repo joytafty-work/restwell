@@ -157,12 +157,6 @@
                             <li><a href="#">!hello3!</a></li>
                         </ul>
                     </div>
-<!--                     <button type="button" class="btn btn-default" 
-                        data-ot="load lastnight's data" data-ot-delay="0"
-                        style="background-color: rgba(0, 0, 0, 0.05); border:0px" 
-                        id="fetchsleep" onClick="fetchSleep()">
-                        <span class="glyphicon glyphicon-repeat" style="color:#c3325f"></span>
-                     </button>                     -->
                 </div>
                 <div class="row">
                    <h1num>87</h1num>
@@ -248,45 +242,46 @@
     </div> <!-- //container -->
     {% if fitbit_authenticated %}
     <!-- Load data for top panel display -->
+
     <script>
-    $.getJSON("data.json", function(d) {
-        tz = moment().tz(d[0].timezone).format("HH:mm A");
-        $("#topheader1").text(d[0].timezone);
-        $("#topheader2").text(tz);
-    });
-    </script>
+    // $.getJSON("data.json", function(d) {
+    //     tz = moment().tz(d[0].timezone).format("HH:mm A");
+    //     $("#topheader1").text(d[0].timezone);
+    //     $("#topheader2").text(tz);
+    // });
+    // </script>
+
     <!-- Load data for dropdown selector -->
     <script>
-    $('#selectdate').prepend($('<li/>', {
-    }).prepend($('<a/>', {
-        'href': '/sleep/sleepRecord.json', 
-        'data-transidion': 'slide', 
-        'text': 'hello'
-    })));
-    // $('#selectdate').listview('refresh');
+    // $('#selectdate').prepend($('<li/>', {
+    // }).prepend($('<a/>', {
+    //     'href': '/sleep/sleepRecord.json', 
+    //     'data-transidion': 'slide', 
+    //     'text': 'hello'
+    // })));
     </script>
 
     <!-- Load data for middle panel display -->
     <script>
-    $.getJSON('/sleep/sleepRecord.json', function (d) {
-    data = d['bedTime'];
-    if(data.length == 0) {
-       alert('No sleep recorded.  Please hold the Fitbit button before falling asleep.');
-    } else {
-        l = d.date.length;
-        $('#day').text(d['date'][l-1]);
-        $('#bedtime').text(d['bedTime'][l-1]);
-        $('#awaketime').text(d['awakeTime'][l-1]);
-        if(d['timeInBed'][l-1] != undefined) {
-            hh_slduration = Math.floor(d['timeInBed'][l-1]/60);
-            mm_slduration = d['timeInBed'][l-1]%60;    
-            $('#slduration').text(hh_slduration + ' hr ' + mm_slduration + ' mins');
-            }
-        if(d['efficiency'][l-1] != undefined) {
-            $('#sleff').text(d['efficiency'][l-1] + ' %');
-            }
-        }
-    });
+    // $.getJSON('/sleep/sleepRecord.json', function (d) {
+    // data = d['bedTime'];
+    // if(data.length == 0) {
+    //    alert('No sleep recorded.  Please hold the Fitbit button before falling asleep.');
+    // } else {
+    //     l = d.date.length;
+    //     $('#day').text(d['date'][l-1]);
+    //     $('#bedtime').text(d['bedTime'][l-1]);
+    //     $('#awaketime').text(d['awakeTime'][l-1]);
+    //     if(d['timeInBed'][l-1] != undefined) {
+    //         hh_slduration = Math.floor(d['timeInBed'][l-1]/60);
+    //         mm_slduration = d['timeInBed'][l-1]%60;    
+    //         $('#slduration').text(hh_slduration + ' hr ' + mm_slduration + ' mins');
+    //         }
+    //     if(d['efficiency'][l-1] != undefined) {
+    //         $('#sleff').text(d['efficiency'][l-1] + ' %');
+    //         }
+    //     }
+    // });
 </script>
     {% endif %}
 

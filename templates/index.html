@@ -133,9 +133,9 @@
     </div>
 
     <!-- Lower Panel -->
-    <div class="container">
-        <div class="row-fluid">
-            <div class=".col-xs-12 .col-sm-6 .col-lg-8 panel panel-default">
+<div class="container">
+    <div class="row-fluid">
+        <div class=".col-xs-12 .col-sm-6 .col-lg-8 panel panel-default">
 
             <!-- Row 1: Fitbit button -->
             <div class="row-fluid">
@@ -152,58 +152,64 @@
                 </div>
             </div>                
 
-                <!-- Row 2 -->
-                <div class="row-fluid">
-                    <!-- <div class=".col-xs-12 col-xs-offset-4 .col-sm-2 col-sm-offset-1"> -->
-                    <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
-                        <p>Record date</p>
-                        <h4 id="day"></h4>
-                    </div>
-
-                    <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
-                        <p>Sleep Efficiency</p>
-                        <h4 id="sleff"><p id="load"><p></h4>
-                    </div>
-                    <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
-                        <p>Sleep Duration</p>
-                        <h4 id="slduration"><p id="load"><p></h4>
-                    </div>
+            <!-- Row 2 -->
+            {% if fitbit_authenticated %}
+            <div class="row-fluid">
+                <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
+                    <p>Record date</p>
+                    <h4 id="day"></h4>
                 </div>
-                <!-- Row 3 -->
-                <div class="row-fluid">
-                    <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
-                        <p>Bed time</p>
-                        <h4 id="bedtime"><p id="load"><p></h4>
-                    </div>
-                    <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
-                        <p>Awake time</p>
-                        <h4 id="awaketime"><p id="load"><p></h4>
-                    </div>
+                <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
+                    <p>Sleep Efficiency</p>
+                    <h4 id="sleff"><p id="load"><p></h4>
                 </div>
-            </div><!-- //main content -->
-
-            <!-- Column2 -->            
-            <div class=".col-xs-6 .col-sm-4 panel panel-default">
-            <!-- Row 1 -->
-                <div class="row-fluid" style="min-height:180px;">                     
-                    <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
-                        <p>Weekly Trend</p>
-                    </div>
+                <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
+                    <p>Sleep Duration</p>
+                    <h4 id="slduration"><p id="load"><p></h4>
                 </div>
             </div>
 
-            <!-- Column2 -->            
-            <div class=".col-xs-6 .col-sm-4 panel panel-default">
-            <!-- Row 1 -->
-                <div class="row-fluid" style="min-height:180px;">                     
-                    <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
-                        <p>Your best record</p>
-                    </div>
+            <!-- Row 3 -->
+            <div class="row-fluid">
+                <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
+                    <p>Bed time</p>
+                    <h4 id="bedtime"><p id="load"><p></h4>
+                </div>
+                <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
+                    <p>Awake time</p>
+                    <h4 id="awaketime"><p id="load"><p></h4>
                 </div>
             </div>
-        
-        </div><!-- //row -->
-    </div> <!-- //container -->
+            {% else %}
+            <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
+                <p id="authmessage"></p>
+            </div>
+            {% endif %}
+
+        </div><!-- //main content -->
+
+        <!-- Column2 -->            
+        <div class=".col-xs-6 .col-sm-4 panel panel-default">
+        <!-- Row 1 -->
+            <div class="row-fluid" style="min-height:180px;">                     
+                <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
+                    <p>Weekly Trend</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Column2 -->            
+        <div class=".col-xs-6 .col-sm-4 panel panel-default">
+        <!-- Row 1 -->
+            <div class="row-fluid" style="min-height:180px;">                     
+                <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
+                    <p>Your best record</p>
+                </div>
+            </div>
+        </div>
+    
+    </div><!-- //row -->
+</div> <!-- //container -->
     <script>
     $('h4>p').css({
         "font-family":"Abel",
@@ -252,7 +258,7 @@
     </script>
     {% else %}
     <script>
-    $('#load').text("Please authenticate")
+    $('#authmessage').text("Please authenticate")
     </script>
     {% endif %}
 </body>

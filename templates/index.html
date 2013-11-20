@@ -264,7 +264,8 @@
             items.push(pushstr);
             console.log(pushstr);
             $("#" + datename).click(item, function (item) {
-                console.log(item);
+                alert(item);  
+                $('#day').append(item);              
             })
         })
 

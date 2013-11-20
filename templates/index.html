@@ -157,7 +157,7 @@
             <div class="row-fluid">
                 <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
                     <p>Record date</p>
-                    <h4 id="day"></h4>
+                    <h4 id="day">Select date to view</h4>
                 </div>
                 <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
                     <p>Sleep Efficiency</p>
@@ -240,7 +240,7 @@
         $('#selectdate').prepend(items.join(''));
     });
     // Record user selection
-    var j;
+    var j = dates.length-1;
     $('#selectdate').click(function (event) {
         var chosendate = $(event.target).text(); 
         $('#day').text(chosendate); 

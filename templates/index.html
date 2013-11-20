@@ -119,7 +119,7 @@
                 <!-- Date SWitch Dropdown -->
                 <div class="row">
                     <div class="btn-group panel2 panel2-default">
-                      <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" href="#" style="panel2 panel2-default">
+                      <button id="datebutton" class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" href="#" style="panel2 panel2-default">
                         Switch Date <span class="caret"></span>
                       </button>
                       <ul class="dropdown-menu" role="menu" id="selectdate" name="dateselector">
@@ -240,7 +240,8 @@
         $('#selectdate').prepend(items.join(''));
     });
     // Record user selection
-    var j = dates.length-1;
+    // var j = dates.length-1;
+    var j;
     $('#selectdate').click(function (event) {
         var chosendate = $(event.target).text(); 
         $('#day').text(chosendate); 
@@ -259,7 +260,7 @@
     {% else %}
     <script>
     $('#authmessage').text("Welcome! Please login to Fitbit to View")
-    $('#selectdate').hide();
+    $('#datebutton').hide();
     $('#weeklytrend').hide();
     $('#yourbest').hide();
     </script>

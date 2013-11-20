@@ -122,20 +122,13 @@
                       <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" href="#" style="panel2 panel2-default">
                         Switch Date <span class="caret"></span>
                       </button>
-                      <ul class="dropdown-menu" role="menu" id="selectdate" style="panel2 panel2-default">
+                      <ul class="dropdown-menu" role="menu" id="selectdate" name="dateselector">
                         <li class="divider"></li>
                         <li><a href="/sleep/sleepRecord.json">view all</a></li>
                       </ul>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div id="selectionsPane">
-          <label for="bootChooserControl">Boot style:</label>&nbsp;
-          <select id="bootChooserControl" name="bootStyle"></select>
         </div>
     </div>
 
@@ -232,15 +225,16 @@
             pushstr = "<li id='" + datename + "' value='" + item + "'><a href='#'>" + item + "</a></li>";
             items.push(pushstr);
             datelist.push(datename);
-            $('#' + datename).click(function () {
-                alert($(this).text());
-            });
+            // $('#' + datename).click(function () {
+            //     alert($(this).text());
+            // });
         })
         $('#selectdate').prepend(items.join(''));
     });
-    $('#chosen2013-10-13').click(function () {
-        console.log($(this).text());
-    });
+    $('#selectdate').change(function(event) {
+        alert($('#day').text());
+    })
+
     console.log(datelist);
     </script>
 

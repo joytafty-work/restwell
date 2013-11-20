@@ -237,8 +237,7 @@
         $.getJSON('/sleep/sleepRecord.json', function (d) {
             dates = d['date'];        
             $(dates).filter(function(i, e) {
-                if (e == chosendate) {
-                    return i;
+                if (e == chosendate) {return i;}
             })
             console.log(i);
             $('#bedtime').text(d['bedTime'][i]);

@@ -264,8 +264,8 @@
             items.push(pushstr);
             console.log(pushstr);
             $("input:dropdown-menu[id=" + datename + "]").click(function () {
-                alert(item);  
-                $('#day').append(item);              
+                alert($(this).val());  
+                $('#day').append($(this).val());              
             })
         })
 

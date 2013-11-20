@@ -189,7 +189,7 @@
         </div><!-- //main content -->
 
         <!-- Column2 -->            
-        <div class=".col-xs-6 .col-sm-4 panel panel-default">
+        <div id="weeklytrend" class=".col-xs-6 .col-sm-4 panel panel-default">
         <!-- Row 1 -->
             <div class="row-fluid" style="min-height:180px;">                     
                 <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
@@ -199,7 +199,7 @@
         </div>
 
         <!-- Column2 -->            
-        <div class=".col-xs-6 .col-sm-4 panel panel-default">
+        <div id="yourbest" class=".col-xs-6 .col-sm-4 panel panel-default">
         <!-- Row 1 -->
             <div class="row-fluid" style="min-height:180px;">                     
                 <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
@@ -258,7 +258,9 @@
     </script>
     {% else %}
     <script>
-    $('#authmessage').text("Please authenticate")
+    $('#authmessage').text("Welcome! Please login to Fitbit to View")
+    $('#weeklytrend').hide();
+    $('#yourbest').hide();
     </script>
     {% endif %}
 </body>

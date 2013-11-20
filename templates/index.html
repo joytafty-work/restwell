@@ -236,22 +236,17 @@
         $('#day').text(chosendate); 
         j = dates.indexOf($('#day').text());
         console.log(dates[j]);
-        console.log(j);
+        // Update other DOMs
+        $.getJSON('/sleep/sleepRecord.json', function (d) {
+            console.log(j);
+            $('#bedtime').text(d['bedTime'][j]);
+            $('#awaketime').text(d['awakeTime'][j]);
+            hh_slduration = Math.floor(d['timeInBed'][j]/60);
+            mm_slduration = d['timeInBed'][j]%60;
+            $('#slduration').text(hh_slduration + ' hr ' + mm_slduration + ' mins');
+            $('#efficiency').text(d['efficiency'][j] + ' %'); 
+        })
     });
-    // Update other DOMs
-    // $.getJSON('/sleep/sleepRecord.json', function (d) {
-    //     dates = d['date'];        
-    //     $(dates).filter(function(i, e) {
-    //         if (e == $('#day').text()) {return i}; 
-    //     });
-    //     $('#bedtime').text(d['bedTime'][i]);
-    //     $('#awaketime').text(d['awakeTime'][i]);
-    //     hh_slduration = Math.floor(d['timeInBed'][i]/60);
-    //     mm_slduration = d['timeInBed'][i]%60;
-    //     $('#slduration').text(hh_slduration + ' hr ' + mm_slduration + ' mins');
-    //     $('#efficiency').text(d['efficiency'][i] + ' %');
-    // });
-
     </script>
 
     <!-- Load data for middle panel display -->

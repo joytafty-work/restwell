@@ -110,6 +110,21 @@
     </div>
 
     <div class="container">
+        <!-- Row 1: Fitbit button -->
+        <div class="row-fluid">
+            <div class=".col-xs-6 col-xs-offset-4 .col-sm-3 col-sm-offset-6">
+                <form>
+                <p class="text-center">
+                    {% if fitbit_authenticated %}
+                    <a type="submit" class="btn btn-info" href="/logout">Logout Fitbit</a>
+                    {% else %}
+                    <a type="submit" class="btn btn-info" href="/login">Authenticate Fitbit</a>
+                    {% endif %}
+                </p>
+                </form>
+            </div>
+        </div>                
+
         <div class ="row-fluid">
             <div class=".col-xs-12 .col-sm-6 .col-lg-8" style="panel2 panel2-default">
                 <!-- Sleep score panel -->
@@ -164,21 +179,6 @@
                         <h4 id="awaketime"><p id="load">loading . . . <p></h4>
                     </div>
                 </div>
-
-                <!-- Row 4 -->
-                <div class="row-fluid">
-                    <div class=".col-xs-6 col-xs-offset-4 .col-sm-3 col-sm-offset-6">
-                        <form>
-                        <p class="text-center">
-                            {% if fitbit_authenticated %}
-                            <a type="submit" class="btn btn-success" href="/logout">Logout Fitbit</a>
-                            {% else %}
-                            <a type="submit" class="btn btn-success" href="/login">Authenticate Fitbit</a>
-                            {% endif %}
-                        </p>
-                        </form>
-                    </div>
-                </div>                
             </div><!-- //main content -->
 
             <!-- Column2 -->            

@@ -260,15 +260,14 @@
         var pushstr = '';
         $.each(d.date, function (i, item) {
             datename = 'chosen' + item;
-            pushstr = "<li id='" + datename + "' value = '" + item + "'><a href='#'>" + item + "</a></li>";
+            pushstr = "<li id='" + datename + "' value='" + item + "'><a href='#'>" + item + "</a></li>";
             items.push(pushstr);
             console.log(pushstr);
-            $("input:dropdown-menu[id=" + datename + "]").click(function () {
-                alert($(this).val());  
-                $('#day').append($(this).val());              
+            $("#" + datename).click(function () {
+                alert($(this).text());  
+                $('#day').append($(this).text());              
             })
         })
-
         $('#selectdate').prepend(items.join(''));
     });
     </script>

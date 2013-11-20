@@ -203,8 +203,6 @@
         
         </div><!-- //row -->
     </div> <!-- //container -->
-    {% if fitbit_authenticated %}
-    <!-- Load data for top panel display -->
     <script>
     $('#load').css({
         'font-family': "Abel", Arial, sans-serif;
@@ -212,6 +210,8 @@
             'color': #CCCCCC;
         });
     </script>
+    {% if fitbit_authenticated %}
+    <!-- Load data for top panel display -->
     <script>
     // $.getJSON("/sleep/sleepRecord.json", function(d) {
     //     tz = moment().tz(d[0].timezone).format("HH:mm A");

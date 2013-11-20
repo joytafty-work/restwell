@@ -207,8 +207,8 @@
     <script>
     $('#load').css({
         'font-family': "Abel", Arial, sans-serif,
-        'font-size': 14,
-            'color': #CCCCCC,
+        'font-size': 10,
+            'color': "aqua",
         });
     </script>
     {% if fitbit_authenticated %}
@@ -250,34 +250,10 @@
             hh_slduration = Math.floor(d['timeInBed'][j]/60);
             mm_slduration = d['timeInBed'][j]%60;
             $('#slduration').text(hh_slduration + ' hr ' + mm_slduration + ' mins');
-            $('#efficiency').text(d['efficiency'][j] + ' %'); 
+            $('#sleff').text(d['efficiency'][j] + ' %'); 
         })
     });
     </script>
-
-    <!-- Load data for middle panel display -->
-    <script>
-    // $.getJSON('/sleep/sleepRecord.json', function (d) {
-    // data = d['bedTime'];
-    // if(data.length == 0) {
-    //    alert('No sleep recorded.  Please hold the Fitbit button before falling asleep.');
-    // } else {
-    //     l = d.date.length;
-    //     $('#day').text(d['date'][l-1]);
-    //     $('#bedtime').text(d['bedTime'][l-1]);
-    //     $('#awaketime').text(d['awakeTime'][l-1]);
-    //     if(d['timeInBed'][l-1] != undefined) {
-    //         hh_slduration = Math.floor(d['timeInBed'][l-1]/60);
-    //         mm_slduration = d['timeInBed'][l-1]%60;    
-    //         $('#slduration').text(hh_slduration + ' hr ' + mm_slduration + ' mins');
-    //         }
-    //     if(d['efficiency'][l-1] != undefined) {
-    //         $('#sleff').text(d['efficiency'][l-1] + ' %');
-    //         }
-    //     }
-    // });
-</script>
     {% endif %}
-
 </body>
 </html>

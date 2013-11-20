@@ -216,6 +216,7 @@
     <!-- Load data for dropdown selector -->
     <script>
     // Prepand list of available data
+    var dates;
     $.getJSON('/sleep/sleepRecord.json', function (d) {
         dates = d['date'];
         var items = []; 
@@ -231,15 +232,18 @@
     // Record user selection
     $('#selectdate').click(function (event) {
         var chosendate = $(event.target).text(); 
-        console.log($(event.target).text());
+        // console.log($(event.target).text());
         $('#day').text(chosendate); 
-        console.log(chosendate);
         $.getJSON('/sleep/sleepRecord.json', function (d) {
             dates = d['date'];        
             $(dates).filter(function(i, e) {
-                if (e == chosendate) {return i;}
+                console.log($('#day').text());        
+                if (e == chosendate) {
+                    $('#day').data(i);
+                    return i;
+                }
             })
-            console.log(i);
+            console.log($('#day').data());
             $('#bedtime').text(d['bedTime'][i]);
             $('#awaketime').text(d['awakeTime'][i]);
             hh_slduration = Math.floor(d['timeInBed'][i]/60);

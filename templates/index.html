@@ -215,7 +215,7 @@
 
     <!-- Load data for dropdown selector -->
     <script>
-    var datelist = [];
+    var d;
     $.getJSON('/sleep/sleepRecord.json', function (d) {
         var items = []; 
         var datename = '';
@@ -224,18 +224,14 @@
             datename = 'chosen' + item;
             pushstr = "<li id='" + datename + "' value='" + item + "'><a href='#'>" + item + "</a></li>";
             items.push(pushstr);
-            datelist.push(datename);
-            // $('#' + datename).click(function () {
-            //     alert($(this).text());
-            // });
         })
         $('#selectdate').prepend(items.join(''));
     });
-    $('#selectdate').change(function(event) {
-        alert($('#day').text());
-    })
-
-    console.log(datelist);
+    $('#selectdate').click(function (event) {
+        var chosendate = $(event.target).text(); 
+        console.log($(event.target).text());
+        $('#day').text(chosendate);
+    });
     </script>
 
     <!-- Load data for middle panel display -->

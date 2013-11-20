@@ -261,9 +261,13 @@
         $.each(d.date, function (i, item) {
             datename = 'chosen' + item
             pushstr = "<li ='#" + datename + "'><a href='#'>" + item + "</a></li>";
-            console.log(pushstr)
+            // console.log(pushstr)
             items.push(pushstr);
+            $('#' + datename).click(function(item) {
+                console.log(item);
+            })
         })
+
         $('#selectdate').prepend(items.join(''));
     });
     </script>

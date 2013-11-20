@@ -263,7 +263,7 @@
             pushstr = "<li id='" + datename + "' value='" + item + "'><a href='#'>" + item + "</a></li>";
             items.push(pushstr);
             console.log(pushstr);
-            $("#" + datename).click(function () {
+            $("'#" + datename + "'").click(function () {
                 alert($(this).text());  
                 $('#day').append($(this).text());              
             })

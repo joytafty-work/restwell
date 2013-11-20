@@ -259,9 +259,10 @@
         var datename = '';
         var pushstr = '';
         $.each(d.date, function (i, item) {
-            datename = 'chosen' + item
-            pushstr = "<li ='#" + datename + "'><a href='#'>" + item + "</a></li>";
+            datename = 'chosen' + item;
+            pushstr = "<li id=" + datename + "'><a href='#'>" + item + "</a></li>";
             items.push(pushstr);
+            console.log(pushstr)
             $('#' + datename).click(item function (item) {
                 console.log(item);
             })

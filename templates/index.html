@@ -230,18 +230,20 @@
     // Record user selection
     $('#selectdate').click(function (event) {
         var chosendate = $(event.target).text(); 
-        // console.log($(event.target).text());
+        console.log($(event.target).text());
         $('#day').text(chosendate); 
-        $('#day').data(chosendate);       
+        // $('#day').data(chosendate);       
     });
     // Update other DOMs
     $.getJSON('/sleep/sleepRecord.json', function (d) {
         dates = d['date'];        
         console.log(dates);
         l = $.grep(dates, function (ele) {
+            console.log(ele);
+            console.log('#day').text();
             return ele.id == $('#day').text();
-        console.log("l");
         })
+        console.log(l);
     });
 
     </script>

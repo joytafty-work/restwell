@@ -162,22 +162,22 @@
 
                     <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
                         <p>Sleep Efficiency</p>
-                        <h4 id="sleff"><p id="load">loading . . . <p></h4>
+                        <h4 id="sleff"><p id="load"><p></h4>
                     </div>
                     <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
                         <p>Sleep Duration</p>
-                        <h4 id="slduration"><p id="load">loading . . . <p></h4>
+                        <h4 id="slduration"><p id="load"><p></h4>
                     </div>
                 </div>
                 <!-- Row 3 -->
                 <div class="row-fluid">
                     <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
                         <p>Bed time</p>
-                        <h4 id="bedtime"><p id="load">loading . . . <p></h4>
+                        <h4 id="bedtime"><p id="load"><p></h4>
                     </div>
                     <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
                         <p>Awake time</p>
-                        <h4 id="awaketime"><p id="load">loading . . . <p></h4>
+                        <h4 id="awaketime"><p id="load"><p></h4>
                     </div>
                 </div>
             </div><!-- //main content -->
@@ -214,11 +214,7 @@
     {% if fitbit_authenticated %}
     <!-- Load data for top panel display -->
     <script>
-    // $.getJSON("/sleep/sleepRecord.json", function(d) {
-    //     tz = moment().tz(d[0].timezone).format("HH:mm A");
-    //     $("#topheader1").text(d[0].timezone);
-    //     $("#topheader2").text(tz);
-    // });
+        $('h4>p').text("fetching . . . ")
     </script>
 
     <!-- Load data for dropdown selector -->
@@ -253,6 +249,10 @@
             $('#sleff').text(d['efficiency'][j] + ' %'); 
         })
     });
+    </script>
+    {% else %}
+    <script>
+    $('h4').text("Please authenticate")
     </script>
     {% endif %}
 </body>

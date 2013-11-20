@@ -238,12 +238,10 @@
     $.getJSON('/sleep/sleepRecord.json', function (d) {
         dates = d['date'];        
         console.log(dates);
-        l = $.grep(dates, function (ele) {
-            console.log(ele);
-            console.log('#day').text();
-            return ele.id == $('#day').text();
-        })
-        console.log(l);
+        $(dates).filter(function(i, e) {
+            if (e == $('#day').text()) {return i}; 
+        });
+        console.log(i);
     });
 
     </script>

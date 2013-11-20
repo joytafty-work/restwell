@@ -235,10 +235,8 @@
         var chosendate = $(event.target).text(); 
         $('#day').text(chosendate); 
         j = dates.indexOf($('#day').text());
-        console.log(dates[j]);
         // Update other DOMs
         $.getJSON('/sleep/sleepRecord.json', function (d) {
-            console.log(j);
             $('#bedtime').text(d['bedTime'][j]);
             $('#awaketime').text(d['awakeTime'][j]);
             hh_slduration = Math.floor(d['timeInBed'][j]/60);

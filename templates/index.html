@@ -92,6 +92,60 @@
 
     </style>
 
+        {% if fitbit_authenticated %}
+        <!-- Load data for top panel display -->
+
+        <script>
+        // $.getJSON("/sleep/sleepRecord.json", function(d) {
+        //     tz = moment().tz(d[0].timezone).format("HH:mm A");
+        //     $("#topheader1").text(d[0].timezone);
+        //     $("#topheader2").text(tz);
+        // });
+        </script>
+
+        <!-- Load data for dropdown selector -->
+        <script>
+        $.getJSON('/sleep/sleepRecord.json', function (d) {
+            var items = []; 
+            var datename = '';
+            var pushstr = '';
+            $.each(d.date, function (i, item) {
+                datename = 'chosen' + item
+                pushstr = "<li ='#" + datename + "'><a href='#'>" + item + "</a></li>";
+                items.push(pushstr);
+                $('#' + datename).click(item function (item) {
+                    console.log(item);
+                })
+            })
+
+            $('#selectdate').prepend(items.join(''));
+        });
+        </script>
+
+        <!-- Load data for middle panel display -->
+        <script>
+        $.getJSON('/sleep/sleepRecord.json', function (d) {
+        data = d['bedTime'];
+        if(data.length == 0) {
+           alert('No sleep recorded.  Please hold the Fitbit button before falling asleep.');
+        } else {
+            l = d.date.length;
+            $('#day').text(d['date'][l-1]);
+            $('#bedtime').text(d['bedTime'][l-1]);
+            $('#awaketime').text(d['awakeTime'][l-1]);
+            if(d['timeInBed'][l-1] != undefined) {
+                hh_slduration = Math.floor(d['timeInBed'][l-1]/60);
+                mm_slduration = d['timeInBed'][l-1]%60;    
+                $('#slduration').text(hh_slduration + ' hr ' + mm_slduration + ' mins');
+                }
+            if(d['efficiency'][l-1] != undefined) {
+                $('#sleff').text(d['efficiency'][l-1] + ' %');
+                }
+            }
+        });
+    </script>
+        {% endif %}
+
 </head>
 <body>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
@@ -100,40 +154,6 @@
     <script src="../static/js/opentip.js"></script>
     <script src="http://momentjs.com/downloads/moment-timezone.min.js"></script>
     <script src="../static/js/moment-timezone-data.js"></script>
-    <!-- fetchSleep() -->
-    <script type="text/javascript">
-        function fetchSleep() {
-            // $("#fetchsleep").click(function() {
-            //     // $("#slqual").css("background-color", "white");
-            //     $.getJSON("data.json", function (d) {
-            //         $.each(d, function(p, v){
-            //             // Sleep Efficiency
-            //             slef = v.efficiency;
-            //             // Sleep Duration Value
-            //             hr_slduration = Math.floor(v.timeInBed/60);
-            //             min_slduration = (v.timeInBed%60);
-            //             // Date 
-            //             recdate = moment(v.date).format("ddd MMM DD, YYYY");
-            //             // Bed Time
-            //             slbedtime = moment(v.date + '-' + v.startTime, "YYYY-MM-DD-HH:mm").format("HH:mm A");
-            //             // Awake Time
-            //             tempbedtime = moment(v.date + '-' + v.startTime, "YYYY-MM-DD-HH:mm");
-            //             slawaketime = moment(tempbedtime).add('m', v.timeInBed).format("HH:mm A");
-            //             // Bind data                        
-            //             $("#slqual").text(slef+'%');
-            //             $("#slduration").text(hr_slduration + "h " + min_slduration +"min");
-            //             $("#bedtime").text(slbedtime);
-            //             $("#sldate").text(recdate);
-            //             $("#awaketime").text(slawaketime);
-            //         });
-            //     });
-            // 
-            // $("#fetchsleep").mouseleave(function() {
-            //     // $("#slqual").css("background-color", "pink");
-            //     });
-            // });
-        }
-    </script>
 
     <!-- Outer Score Panel -->
     
@@ -241,59 +261,5 @@
         
         </div><!-- //row -->
     </div> <!-- //container -->
-    {% if fitbit_authenticated %}
-    <!-- Load data for top panel display -->
-
-    <script>
-    // $.getJSON("/sleep/sleepRecord.json", function(d) {
-    //     tz = moment().tz(d[0].timezone).format("HH:mm A");
-    //     $("#topheader1").text(d[0].timezone);
-    //     $("#topheader2").text(tz);
-    // });
-    </script>
-
-    <!-- Load data for dropdown selector -->
-    <script>
-    $.getJSON('/sleep/sleepRecord.json', function (d) {
-        var items = []; 
-        var datename = '';
-        var pushstr = '';
-        $.each(d.date, function (i, item) {
-            datename = 'chosen' + item
-            pushstr = "<li ='#" + datename + "'><a href='#'>" + item + "</a></li>";
-            items.push(pushstr);
-            $('#' + datename).click(item function (item) {
-                console.log(item);
-            })
-        })
-
-        $('#selectdate').prepend(items.join(''));
-    });
-    </script>
-
-    <!-- Load data for middle panel display -->
-    <script>
-    $.getJSON('/sleep/sleepRecord.json', function (d) {
-    data = d['bedTime'];
-    if(data.length == 0) {
-       alert('No sleep recorded.  Please hold the Fitbit button before falling asleep.');
-    } else {
-        l = d.date.length;
-        $('#day').text(d['date'][l-1]);
-        $('#bedtime').text(d['bedTime'][l-1]);
-        $('#awaketime').text(d['awakeTime'][l-1]);
-        if(d['timeInBed'][l-1] != undefined) {
-            hh_slduration = Math.floor(d['timeInBed'][l-1]/60);
-            mm_slduration = d['timeInBed'][l-1]%60;    
-            $('#slduration').text(hh_slduration + ' hr ' + mm_slduration + ' mins');
-            }
-        if(d['efficiency'][l-1] != undefined) {
-            $('#sleff').text(d['efficiency'][l-1] + ' %');
-            }
-        }
-    });
-</script>
-    {% endif %}
-
 </body>
 </html>

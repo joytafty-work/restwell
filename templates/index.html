@@ -256,8 +256,12 @@
     <script>
     $.getJSON('/sleep/sleepRecord.json', function (d) {
         var items = []; 
+        var datename = '';
+        var pushstr = '';
         $.each(d.date, function (i, item) {
-            pushstr = "<li onclick='$('#chosendate').data('name', 'value'); $('#chosendate').submit()'><a href='#'>" + item + "</a></li>";
+            datename = 'chosen' + item
+            pushstr = "<li ='#" + datename + "'><a href='#'>" + item + "</a></li>";
+            console.log(pushstr)
             items.push(pushstr);
         })
         $('#selectdate').prepend(items.join(''));

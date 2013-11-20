@@ -232,11 +232,8 @@
     // Record user selection
     $('#selectdate').click(function (event) {
         var chosendate = $(event.target).text(); 
-        console.log(dates);
         // console.log($(event.target).text());
         $('#day').text(chosendate); 
-        i = dates.indexOf(chosendate);
-        console.log(i);
         // $.getJSON('/sleep/sleepRecord.json', function (d) {
         //     dates = d['date'];        
         //     $(dates).filter(function(i, e) {
@@ -255,6 +252,9 @@
         //     $('#efficiency').text(d['efficiency'][i] + ' %');
         // })
     });
+    j = dates.indexOf($('#day').text());
+    console.log(dates[j]);
+    console.log(j);
     // Update other DOMs
     // $.getJSON('/sleep/sleepRecord.json', function (d) {
     //     dates = d['date'];        

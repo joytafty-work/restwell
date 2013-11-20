@@ -232,25 +232,28 @@
     // Record user selection
     $('#selectdate').click(function (event) {
         var chosendate = $(event.target).text(); 
+        console.log(dates);
         // console.log($(event.target).text());
         $('#day').text(chosendate); 
-        $.getJSON('/sleep/sleepRecord.json', function (d) {
-            dates = d['date'];        
-            $(dates).filter(function(i, e) {
-                console.log($('#day').text());        
-                if (e == chosendate) {
-                    $('#day').data(i);
-                    return i;
-                }
-            })
-            console.log($('#day').data());
-            $('#bedtime').text(d['bedTime'][i]);
-            $('#awaketime').text(d['awakeTime'][i]);
-            hh_slduration = Math.floor(d['timeInBed'][i]/60);
-            mm_slduration = d['timeInBed'][i]%60;
-            $('#slduration').text(hh_slduration + ' hr ' + mm_slduration + ' mins');
-            $('#efficiency').text(d['efficiency'][i] + ' %');
-        })
+        i = dates.indexOf(chosendate);
+        console.log(i);
+        // $.getJSON('/sleep/sleepRecord.json', function (d) {
+        //     dates = d['date'];        
+        //     $(dates).filter(function(i, e) {
+        //         console.log($('#day').text());        
+        //         if (e == chosendate) {
+        //             $('#day').append(i);
+        //             return i;
+        //         }
+        //     })
+        //     console.log($('#day').data());
+        //     $('#bedtime').text(d['bedTime'][i]);
+        //     $('#awaketime').text(d['awakeTime'][i]);
+        //     hh_slduration = Math.floor(d['timeInBed'][i]/60);
+        //     mm_slduration = d['timeInBed'][i]%60;
+        //     $('#slduration').text(hh_slduration + ' hr ' + mm_slduration + ' mins');
+        //     $('#efficiency').text(d['efficiency'][i] + ' %');
+        // })
     });
     // Update other DOMs
     // $.getJSON('/sleep/sleepRecord.json', function (d) {

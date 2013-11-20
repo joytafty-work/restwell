@@ -262,9 +262,12 @@
             datelist.push(datename);
             $('#' + datename).click(function () {
                 alert($(this).text());
-            })
+            });
         })
         $('#selectdate').prepend(items.join(''));
+    });
+    $('#chosen2013-10-13').click(function () {
+        console.log($(this).text());
     });
     console.log(datelist);
     </script>

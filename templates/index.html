@@ -100,41 +100,6 @@
     <script src="../static/js/opentip.js"></script>
     <script src="http://momentjs.com/downloads/moment-timezone.min.js"></script>
     <script src="../static/js/moment-timezone-data.js"></script>
-    <!-- fetchSleep() -->
-    <script type="text/javascript">
-        function fetchSleep() {
-            // $("#fetchsleep").click(function() {
-            //     // $("#slqual").css("background-color", "white");
-            //     $.getJSON("data.json", function (d) {
-            //         $.each(d, function(p, v){
-            //             // Sleep Efficiency
-            //             slef = v.efficiency;
-            //             // Sleep Duration Value
-            //             hr_slduration = Math.floor(v.timeInBed/60);
-            //             min_slduration = (v.timeInBed%60);
-            //             // Date 
-            //             recdate = moment(v.date).format("ddd MMM DD, YYYY");
-            //             // Bed Time
-            //             slbedtime = moment(v.date + '-' + v.startTime, "YYYY-MM-DD-HH:mm").format("HH:mm A");
-            //             // Awake Time
-            //             tempbedtime = moment(v.date + '-' + v.startTime, "YYYY-MM-DD-HH:mm");
-            //             slawaketime = moment(tempbedtime).add('m', v.timeInBed).format("HH:mm A");
-            //             // Bind data                        
-            //             $("#slqual").text(slef+'%');
-            //             $("#slduration").text(hr_slduration + "h " + min_slduration +"min");
-            //             $("#bedtime").text(slbedtime);
-            //             $("#sldate").text(recdate);
-            //             $("#awaketime").text(slawaketime);
-            //         });
-            //     });
-            // 
-            // $("#fetchsleep").mouseleave(function() {
-            //     // $("#slqual").css("background-color", "pink");
-            //     });
-            // });
-        }
-    </script>
-
     <!-- Outer Score Panel -->
     
     <div class="container">
@@ -164,6 +129,13 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="selectionsPane">
+          <label for="bootChooserControl">Boot style:</label>&nbsp;
+          <select id="bootChooserControl" name="bootStyle"></select>
         </div>
     </div>
 
@@ -260,7 +232,7 @@
             pushstr = "<li id='" + datename + "' value='" + item + "'><a href='#'>" + item + "</a></li>";
             items.push(pushstr);
             datelist.push(datename);
-            $("'#" + datename + "'").click(function () {
+            $('#' + datename).click(function () {
                 alert($(this).text());
             });
         })

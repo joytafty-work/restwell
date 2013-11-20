@@ -182,7 +182,7 @@
             </div>
             {% else %}
             <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
-                <p class="text-center" id="authmessage"></p>
+                <p id="authmessage"></p>
             </div>
             {% endif %}
 
@@ -258,7 +258,7 @@
     </script>
     {% else %}
     <script>
-    $('#authmessage').("Welcome! Please login to Fitbit to View")
+    $('#authmessage').text("Welcome! Please login to Fitbit to View")
     $('#selectdate').hide();
     $('#weeklytrend').hide();
     $('#yourbest').hide();

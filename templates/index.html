@@ -234,15 +234,12 @@
         console.log($(event.target).text());
         $('#day').text(chosendate); 
         console.log(chosendate);
-
         $.getJSON('/sleep/sleepRecord.json', function (d) {
             dates = d['date'];        
             $(dates).filter(function(i, e) {
                 if (e == chosendate) {
                     return i;
-                }; 
-            });
-
+            })
             console.log(i);
             $('#bedtime').text(d['bedTime'][i]);
             $('#awaketime').text(d['awakeTime'][i]);
@@ -250,7 +247,7 @@
             mm_slduration = d['timeInBed'][i]%60;
             $('#slduration').text(hh_slduration + ' hr ' + mm_slduration + ' mins');
             $('#efficiency').text(d['efficiency'][i] + ' %');
-        });
+        })
     });
     // Update other DOMs
     // $.getJSON('/sleep/sleepRecord.json', function (d) {

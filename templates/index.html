@@ -217,6 +217,7 @@
     <script>
     // Prepand list of available data
     $.getJSON('/sleep/sleepRecord.json', function (d) {
+        // dates = d['date'];
         var items = []; 
         var datename = '';
         var pushstr = '';
@@ -232,16 +233,19 @@
         var chosendate = $(event.target).text(); 
         console.log($(event.target).text());
         $('#day').text(chosendate); 
-        // $('#day').data(chosendate);       
     });
     // Update other DOMs
     $.getJSON('/sleep/sleepRecord.json', function (d) {
         dates = d['date'];        
-        console.log(dates);
         $(dates).filter(function(i, e) {
             if (e == $('#day').text()) {return i}; 
         });
-        console.log(i);
+        $('#bedtime').text(d['bedTime'][i]);
+        $('#awaketime').text(d['awakeTime'][i]);
+        hh_slduration = Math.floor(d['timeInBed'][i]/60);
+        mm_slduration = d['timeInBed'][i]%60;
+        $('#slduration').text(hh_slduration + ' hr ' + mm_slduration + ' mins');
+        $('#efficiency').text(d['efficiency'][i] + ' %');
     });
 
     </script>

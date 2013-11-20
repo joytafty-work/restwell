@@ -260,7 +260,7 @@
             pushstr = "<li id='" + datename + "' value='" + item + "'><a href='#'>" + item + "</a></li>";
             items.push(pushstr);
             datelist.push(datename);
-            $.('#' + datename).click(function () {
+            $('#' + datename).click(function () {
                 alert($(this).text());
             })
         })

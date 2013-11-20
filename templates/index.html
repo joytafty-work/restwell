@@ -233,13 +233,12 @@
         var chosendate = $(event.target).text(); 
         console.log($(event.target).text());
         $('#day').text(chosendate); 
-        dates = $('#day').data();
-        console.log(dates);
         $.getJSON('/sleep/sleepRecord.json', function (d) {
             dates = d['date'];        
             $(dates).filter(function(i, e) {
                 if (e == $('#day').text()) {return i}; 
             });
+            console.log(i);
             $('#bedtime').text(d['bedTime'][i]);
             $('#awaketime').text(d['awakeTime'][i]);
             hh_slduration = Math.floor(d['timeInBed'][i]/60);

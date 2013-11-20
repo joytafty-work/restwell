@@ -158,11 +158,7 @@
                         Switch Date <span class="caret"></span>
                       </button>
                       <ul class="dropdown-menu" role="menu" id="selectdate" style="panel2 panel2-default">
-                        <li class="divider" id="chosendate">
-                            <script>
-                                console.log($(this).data);
-                            </script>
-                        </li>
+                        <li class="divider"></li>
                         <li><a href="/sleep/sleepRecord.json">view all</a></li>
                       </ul>
                     </div>
@@ -264,7 +260,9 @@
             pushstr = "<li id='" + datename + "' value='" + item + "'><a href='#'>" + item + "</a></li>";
             items.push(pushstr);
             datelist.push(datename);
-            console.log(pushstr);
+            $.('#' + datename).click(function () {
+                alert($(this).text());
+            })
         })
         $('#selectdate').prepend(items.join(''));
     });
@@ -273,25 +271,25 @@
 
     <!-- Load data for middle panel display -->
     <script>
-    $.getJSON('/sleep/sleepRecord.json', function (d) {
-    data = d['bedTime'];
-    if(data.length == 0) {
-       alert('No sleep recorded.  Please hold the Fitbit button before falling asleep.');
-    } else {
-        l = d.date.length;
-        $('#day').text(d['date'][l-1]);
-        $('#bedtime').text(d['bedTime'][l-1]);
-        $('#awaketime').text(d['awakeTime'][l-1]);
-        if(d['timeInBed'][l-1] != undefined) {
-            hh_slduration = Math.floor(d['timeInBed'][l-1]/60);
-            mm_slduration = d['timeInBed'][l-1]%60;    
-            $('#slduration').text(hh_slduration + ' hr ' + mm_slduration + ' mins');
-            }
-        if(d['efficiency'][l-1] != undefined) {
-            $('#sleff').text(d['efficiency'][l-1] + ' %');
-            }
-        }
-    });
+    // $.getJSON('/sleep/sleepRecord.json', function (d) {
+    // data = d['bedTime'];
+    // if(data.length == 0) {
+    //    alert('No sleep recorded.  Please hold the Fitbit button before falling asleep.');
+    // } else {
+    //     l = d.date.length;
+    //     $('#day').text(d['date'][l-1]);
+    //     $('#bedtime').text(d['bedTime'][l-1]);
+    //     $('#awaketime').text(d['awakeTime'][l-1]);
+    //     if(d['timeInBed'][l-1] != undefined) {
+    //         hh_slduration = Math.floor(d['timeInBed'][l-1]/60);
+    //         mm_slduration = d['timeInBed'][l-1]%60;    
+    //         $('#slduration').text(hh_slduration + ' hr ' + mm_slduration + ' mins');
+    //         }
+    //     if(d['efficiency'][l-1] != undefined) {
+    //         $('#sleff').text(d['efficiency'][l-1] + ' %');
+    //         }
+    //     }
+    // });
 </script>
     {% endif %}
 

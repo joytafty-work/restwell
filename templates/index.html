@@ -215,7 +215,7 @@
 
     <!-- Load data for dropdown selector -->
     <script>
-    var d;
+    // Prepand list of available data
     $.getJSON('/sleep/sleepRecord.json', function (d) {
         var items = []; 
         var datename = '';
@@ -227,11 +227,23 @@
         })
         $('#selectdate').prepend(items.join(''));
     });
+    // Record user selection
     $('#selectdate').click(function (event) {
         var chosendate = $(event.target).text(); 
-        console.log($(event.target).text());
-        $('#day').text(chosendate);
+        // console.log($(event.target).text());
+        $('#day').text(chosendate); 
+        $('#day').data(chosendate);       
     });
+    // Update other DOMs
+    $.getJSON('/sleep/sleepRecord.json', function (d) {
+        dates = d['date'];        
+        console.log(dates);
+        l = $.grep(dates, function (ele) {
+            return ele.id == $('#day').text();
+        console.log("l");
+        })
+    });
+
     </script>
 
     <!-- Load data for middle panel display -->

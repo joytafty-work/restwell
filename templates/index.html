@@ -233,11 +233,16 @@
         var chosendate = $(event.target).text(); 
         console.log($(event.target).text());
         $('#day').text(chosendate); 
+        console.log(chosendate);
+
         $.getJSON('/sleep/sleepRecord.json', function (d) {
             dates = d['date'];        
             $(dates).filter(function(i, e) {
-                if (e == $('#day').text()) {return i}; 
+                if (e == chosendate) {
+                    return i;
+                }; 
             });
+
             console.log(i);
             $('#bedtime').text(d['bedTime'][i]);
             $('#awaketime').text(d['awakeTime'][i]);

@@ -119,8 +119,8 @@ def server():
         print calories_temp
 
         from datetime import datetime, timedelta
-        # temp = [datum for datum in startTime_temp if datum['value']]
-        dateall = dict((t['dateTime'], i) for i, t in enumerate(calories_temp))
+        temp = [datum for datum in startTime_temp if datum['value'] > 0]
+        dateall = dict((t['dateTime'], i) for i, t in enumerate(temp))
         dateall = dateall.keys()
 
         calories = list(xrange(len(dateall)))

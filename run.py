@@ -123,7 +123,7 @@ def server():
         dateall = dict((t['dateTime'], i) for i, t in enumerate(calories_temp))
         dateall = dateall.keys()
 
-        calories = lost(xrange(len(dateall)))
+        calories = list(xrange(len(dateall)))
         for k in range(len(dateall)):
             calories[k] = [e['value'] for e in calories_temp]
 

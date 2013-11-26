@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RestWell</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- <link href="//raw.github.com/marcoceppi/bootstrap-glyphicons/master/css/bootstrap.icon-large.min.css" rel="stylesheet" /> -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet"/>
+<!--     <link href="//fonts.googleapis.com/css?family=Abel|Open+Sans:400,600" rel="stylesheet" />
+ --><!--     <link rel="stylesheet" type="text/css" href="../static/css/opentip.css"/>    
+ -->
+
+</head>
+<body>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+    
+    <!-- Outer Score Panel -->
+    
+    <div class="container">
+        <div class="btn-group">
+            <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" href="#">
+            Action <span class="caret"></span>
+            </button>
+                <ul class="dropdown-menu" role="menu" href="#" id="selectdate">
+                    <li><a href="#">Action</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                </ul>
+        </div>
+    </div>
+
+<!--     <div class="container">
+        <div class ="row-fluid">
+            <div class=".col-xs-12 .col-sm-6 .col-lg-8 panel2 panel2-default">
+                <div class="row-fluid">
+                    <div class="btn-group dropup">
+                      <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" href="#">
+                        Action <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" role="menu" href="#">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                      </ul>
+                    </div>
+                </div>
+                <div class="row">
+                   <h1num>87</h1num>
+                </div>
+            </div>
+        </div>
+    </div>
+ -->
+    {% if fitbit_authenticated %}
+    <!-- Load data for top panel display -->
+
+    <script>
+    // $.getJSON("data.json", function(d) {
+    //     tz = moment().tz(d[0].timezone).format("HH:mm A");
+    //     $("#topheader1").text(d[0].timezone);
+    //     $("#topheader2").text(tz);
+    // });
+    // </script>
+
+    <!-- Load data for dropdown selector -->
+    <script>
+    $.getJSON('/sleep/sleepRecord.json', function (d) {
+        var items = []; 
+        $.each(d.date, function (i, item) {
+            items.push('<li><a href="#">' + item + '</a></li>');
+        })
+        console.log(items);
+        $('#selectdate').prepend(items.join(''));
+    });
+    </script>
+
+    <!-- Load data for middle panel display -->
+    <script>
+    // $.getJSON('/sleep/sleepRecord.json', function (d) {
+    // data = d['bedTime'];
+    // if(data.length == 0) {
+    //    alert('No sleep recorded.  Please hold the Fitbit button before falling asleep.');
+    // } else {
+    //     l = d.date.length;
+    //     $('#day').text(d['date'][l-1]);
+    //     $('#bedtime').text(d['bedTime'][l-1]);
+    //     $('#awaketime').text(d['awakeTime'][l-1]);
+    //     if(d['timeInBed'][l-1] != undefined) {
+    //         hh_slduration = Math.floor(d['timeInBed'][l-1]/60);
+    //         mm_slduration = d['timeInBed'][l-1]%60;    
+    //         $('#slduration').text(hh_slduration + ' hr ' + mm_slduration + ' mins');
+    //         }
+    //     if(d['efficiency'][l-1] != undefined) {
+    //         $('#sleff').text(d['efficiency'][l-1] + ' %');
+    //         }
+    //     }
+    // });
+</script>
+    {% endif %}
+
+</body>
+</html>

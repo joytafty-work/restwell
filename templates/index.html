@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RestWell</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- <link href="//raw.github.com/marcoceppi/bootstrap-glyphicons/master/css/bootstrap.icon-large.min.css" rel="stylesheet" /> -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet"/>
+    <link href="//fonts.googleapis.com/css?family=Abel|Open+Sans:400,600" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../static/css/opentip.css"/>    
+
+    <style>
+        /* http://css-tricks.com/perfect-full-page-background-image/ */
+        html {
+            background: url('https://farm8.staticflickr.com/7261/7490967888_3da071ae6e_b.jpg') no-repeat center center fixed; 
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+
+        body {
+            padding-top: 20px;
+            font-size: 16px;
+            font-family: "Open Sans",serif;
+            background: transparent;
+        }
+
+        h1 {
+            font-family: "Abel", Arial, sans-serif;*/
+            font-weight: 400;
+            font-size: 40px;
+            color: #CCCCCC;
+        }
+
+        h1num {
+            font-family: "Abel", Arial, sans-serif;*/
+            font-weight: 200;
+            font-size: 160px;
+            color: #049cdb;
+        }
+
+        h1head {
+            font-family: "Abel", Arial, sans-serif;*/
+            font-weight: 200;
+            font-size: 80px;
+            color: #CCCCCC;
+        }
+
+        h2 {
+            font-family: "Abel", Arial, sans-serif;
+            font-weight: 400;
+            font-size: 80px;
+            color: #808080;
+        }
+
+        h3 {
+            font-family: "Open Sans", Arial, sans-serif;
+            font-weight: 400;
+            font-size: 60px;
+            color: #808080;
+        }
+
+        h4 {
+            font-family: "Open Sans", Arial, sans-serif;
+            font-weight: 400;
+            font-size: 30px;
+            color: #d9edf7;
+        }
+
+        p {
+            font-family: "Abel", Arial, sans-serif;
+            color: #CCCCCC;
+        }
+
+        /* Override B3 .panel adding a subtly transparent background */
+        .panel {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-color: rgba(255, 255, 255, 0);
+            margin: 5px;
+        }
+
+        .panel2 {
+            background-color: rgba(255, 255, 255, 0);
+            margin:40px;
+        }
+
+        .margin-base-vertical {
+            margin: 40px;
+        }
+
+    </style>
+
+</head>
+<body>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+    <!-- Outer Score Panel -->
+    
+    <div class="container">
+    <main role="main" align="center">
+        <h2 id="topheader1"></h2>
+        <h3 class="margin-base-vertical" id="topheader2"></h3>
+    </main>
+    </div>
+
+    <div class="container">
+        <div class ="row-fluid">
+            <div class=".col-xs-12 .col-sm-6 .col-lg-8" style="panel2 panel2-default">
+                <!-- Sleep score panel -->
+                <div class="row">
+                    <h1num class="text-center">87</h1num>
+                </div>
+                <!-- Date SWitch Dropdown -->
+                <div class="row">
+                    <div class="btn-group panel2 panel2-default">
+                      <button id="datebutton" class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" href="#" style="panel2 panel2-default">
+                        Switch Date <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" role="menu" id="selectdate" name="dateselector">
+                        <li class="divider"></li>
+                        <li><a href="/sleep/sleepRecord.json">view all</a></li>
+                      </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lower Panel -->
+<div class="container">
+    <div class="row-fluid">
+        <div class=".col-xs-12 .col-sm-6 .col-lg-8 panel panel-default">
+
+            <!-- Row 1: Fitbit button -->
+            <div class="row-fluid">
+                <div class=".col-xs-6 col-xs-offset-4 .col-sm-3 col-sm-offset-6 .col-md-4 .col-lg-8">
+                    <form>
+                    <p class="text-center">
+                        {% if fitbit_authenticated %}
+                        <a type="submit" class="btn btn-info" href="/logout">Logout Fitbit</a>
+                        {% else %}
+                        <a type="submit" class="btn btn-info" href="/login">Authenticate Fitbit</a>
+                        {% endif %}
+                    </p>
+                    </form>
+                </div>
+            </div>                
+
+            <!-- Row 2 -->
+            {% if fitbit_authenticated %}
+            <div class="row-fluid">
+                <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
+                    <p>Record date</p>
+                    <h4 id="day"><p id="load">Select date to view<p></h4>
+                </div>
+                <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
+                    <p>Sleep Efficiency</p>
+                    <h4 id="sleff"><p id="load"><p></h4>
+                </div>
+                <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
+                    <p>Sleep Duration</p>
+                    <h4 id="slduration"><p id="load"><p></h4>
+                </div>
+            </div>
+
+            <!-- Row 3 -->
+            <div class="row-fluid">
+                <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
+                    <p>Bed time</p>
+                    <h4 id="bedtime"><p id="load"><p></h4>
+                </div>
+                <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
+                    <p>Awake time</p>
+                    <h4 id="awaketime"><p id="load"><p></h4>
+                </div>
+            </div>
+            {% else %}
+            <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
+                <p id="authmessage" class="text-center"></p>
+            </div>
+            {% endif %}
+
+        </div><!-- //main content -->
+
+        <!-- Column2 -->            
+        <div id="weeklytrend" class=".col-xs-6 .col-sm-4 panel panel-default">
+        <!-- Row 1 -->
+            <div class="row-fluid" style="min-height:180px;">                     
+                <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
+                    <p>Weekly Trend</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Column2 -->            
+        <div id="yourbest" class=".col-xs-6 .col-sm-4 panel panel-default">
+        <!-- Row 1 -->
+            <div class="row-fluid" style="min-height:180px;">                     
+                <div class=".col-xs-10 col-xs-offset-1 .col-sm-3 col-sm-offset-1">
+                    <p>Your best record</p>
+                </div>
+            </div>
+        </div>
+    
+    </div><!-- //row -->
+</div> <!-- //container -->
+    <script>
+    $('h4>p').css({
+        "font-family":"Abel",
+        "font-size":"50%",
+            "color":"#049cdb"
+        });
+    </script>
+    {% if fitbit_authenticated %}
+    <!-- Load data for top panel display -->
+    <script>
+        $('h4>p:even').text("fetching . . . ")
+    </script>
+
+    <!-- Load data for dropdown selector -->
+    <script>
+    // Prepand list of available data
+    var dates;
+    $.getJSON('/sleep/sleepRecord.json', function (d) {
+        dates = d['date'];
+        var items = []; 
+        var datename = '';
+        var pushstr = '';
+        $.each(d.date, function (i, item) {
+            datename = 'chosen' + item;
+            pushstr = "<li id='" + datename + "' value='" + item + "'><a href='#'>" + item + "</a></li>";
+            items.push(pushstr);
+        })
+        $('#selectdate').prepend(items.join(''));
+    });
+
+    var j;
+    $('#selectdate').click(function (event) {
+        var chosendate = $(event.target).text(); 
+        $('#day').text(chosendate); 
+        j = dates.indexOf($('#day').text());
+        // Update other DOMs
+        $.getJSON('/sleep/sleepRecord.json', function (d) {
+            $('#bedtime').text(d['bedTime'][j]);
+            $('#awaketime').text(d['awakeTime'][j]);
+            hh_slduration = Math.floor(d['timeInBed'][j]/60);
+            mm_slduration = d['timeInBed'][j]%60;
+            $('#slduration').text(hh_slduration + ' hr ' + mm_slduration + ' mins');
+            $('#sleff').text(d['efficiency'][j] + ' %'); 
+        })
+    });
+    </script>
+    {% else %}
+    <script>
+    // Hide most DOMs if not authenticated
+    $('#authmessage').text("Welcome! Please login to Fitbit to view your data.")
+    $('#datebutton').hide();
+    $('#weeklytrend').hide();
+    $('#yourbest').hide();
+    </script>
+    {% endif %}
+</body>
+</html>

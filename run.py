@@ -111,19 +111,18 @@ def server():
             list(redis.smembers('fitbit'))])
         return s
 
-    @app.route('/activity/activity.json')
+    @app.route('/activity.json')
     def activity_json():
         fb = fitbit.Fitbit(os.getenv('FITBIT_KEY'), os.getenv('FITBIT_SECRET'), 
             user_key=flask.session['FITBIT_TOKEN'], user_secret=flask.session['FITBIT_TOKEN_SECRET'])
-
-        from datetime import datetime, timedelta
         calories_temp = fb.time_series('activity/calories', period='max')['activity-calories']
 
+        from datetime import datetime, timedelta
         dateall = dict((t['dateTime'], i) for i, t in calories_temp)
         dateall = dateall.keys()
 
         for k in range(len(dateall)):
-            calories[j] = [e['value'] for e in calories_temp]
+            calories[k] = [e['value'] for e in calories_temp]
 
         from itertools import izip
         sorted_list = sorted(izip(date, calories), key=lambda x:x[0])

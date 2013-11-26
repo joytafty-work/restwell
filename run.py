@@ -60,13 +60,13 @@ def crossdomain(origin=None, methods=None, headers=None,
 def load():
     fb = fitbit.Fitbit(os.getenv('FITBIT_KEY'), os.getenv('FITBIT_SECRET'), 
         user_key=flask.session['FITBIT_TOKEN'], user_secret=flask.session['FITBIT_TOKEN_SECRET'])
-    startTime_temp = fb.time_series('sleep/startTime', period='max')['sleep-startTime']
-    timeInBed_temp = fb.time_series('sleep/timeInBed', period='max')['sleep-timeInBed']
-    minutesAsleep_temp = fb.time_series('sleep/minutesAsleep', period='max')['sleep-minutesAsleep']
-    minutesAwake_temp = fb.time_series('sleep/minutesAwake', period='max')['sleep-minutesAwake']
-    minutesAfterWakeup_temp = fb.time_series('sleep/minutesAfterWakeup', period='max')['sleep-minutesAfterWakeup']
-    minutesToFallAsleep_temp = fb.time_series('sleep/minutesToFallAsleep', period='max')['sleep-minutesToFallAsleep']
-    efficiency_temp = fb.time_series('sleep/efficiency', period='max')['sleep-efficiency']
+        startTime_temp = fb.time_series('sleep/startTime', period='max')['sleep-startTime']
+        timeInBed_temp = fb.time_series('sleep/timeInBed', period='max')['sleep-timeInBed']
+        minutesAsleep_temp = fb.time_series('sleep/minutesAsleep', period='max')['sleep-minutesAsleep']
+        minutesAwake_temp = fb.time_series('sleep/minutesAwake', period='max')['sleep-minutesAwake']
+        minutesAfterWakeup_temp = fb.time_series('sleep/minutesAfterWakeup', period='max')['sleep-minutesAfterWakeup']
+        minutesToFallAsleep_temp = fb.time_series('sleep/minutesToFallAsleep', period='max')['sleep-minutesToFallAsleep']
+        efficiency_temp = fb.time_series('sleep/efficiency', period='max')['sleep-efficiency']
     
     from datetime import datetime, timedelta
 
@@ -119,8 +119,7 @@ def load():
     redis.sadd('fitbit', s)
     print s
 
-def load-old():
-
+def loadold():
     # see: http://python-fitbit.readthedocs.org/en/latest/#fitbit-api
     fb = fitbit.Fitbit(
         os.getenv('CONSUMER_KEY'),

@@ -95,7 +95,9 @@ def load():
                 print s
 
 
-def old_auth():
+def detectSleep():
+    import requests, json
+    import pandas as pd
     pass
 
 def server():

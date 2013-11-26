@@ -122,7 +122,7 @@ def server():
         dateall = dict((t['dateTime'], i) for i, t in calories_temp)
         dateall = dateall.keys()
 
-        for k in range(len(dateall))
+        for k in range(len(dateall)):
             calories[j] = [e['value'] for e in calories_temp]
 
         from itertools import izip

@@ -57,83 +57,42 @@ def crossdomain(origin=None, methods=None, headers=None,
         return update_wrapper(wrapped_function, f)
     return decorator
 
-# def load(token, token_secret):
+# def load():
 
-    # fb = fitbit.Fitbit(os.getenv('FITBIT_KEY'), os.getenv('FITBIT_SECRET'), 
-    #     user_key=flask.session['FITBIT_TOKEN'], user_secret=flask.session['FITBIT_TOKEN_SECRET'])
-
-    # # Activity dataset
-    # calories_temp = fb.time_series('activity/calories', period='max')['activity-calories']    
-    # dateall = dict((t['dateTime'], i) for i, y in calories_temp)
-    # for k in range(len(dateall)):
-    #     calories[j] = [e['value'] for e in calories_temp if e['dateTime'] == dtemp]
-
-    # # Sleep dataset
-    # startTime_temp = fb.time_series('sleep/startTime', period='max')['sleep-startTime']
-    # timeInBed_temp = fb.time_series('sleep/timeInBed', period='max')['sleep-timeInBed']
-    # minutesAsleep_temp = fb.time_series('sleep/minutesAsleep', period='max')['sleep-minutesAsleep']
-    # minutesAwake_temp = fb.time_series('sleep/minutesAwake', period='max')['sleep-minutesAwake']
-    # minutesAfterWakeup_temp = fb.time_series('sleep/minutesAfterWakeup', period='max')['sleep-minutesAfterWakeup']
-    # minutesToFallAsleep_temp = fb.time_series('sleep/minutesToFallAsleep', period='max')['sleep-minutesToFallAsleep']
-    # efficiency_temp = fb.time_series('sleep/efficiency', period='max')['sleep-efficiency']
+#     # see: http://python-fitbit.readthedocs.org/en/latest/#fitbit-api
+#     fb = fitbit.Fitbit(
+#         os.getenv('CONSUMER_KEY'),
+#         os.getenv('CONSUMER_SECRET'), 
+#         user_key=os.getenv('USER_KEY'),
+#         user_secret=os.getenv('USER_SECRET'))
     
-    # from datetime import datetime, timedelta
-    # # Take only recorded values
-    # temp = [datum for datum in startTime_temp if datum['value']]
-    # date = dict((t['dateTime'], i) for i, t in enumerate(temp))
-    # date = date.keys()
-
-    # startTime = list(xrange(len(date)))
-    # timeInBed = list(xrange(len(date)))
-    # awakeTime = list(xrange(len(date)))
-    # minutesToFallAsleep = list(xrange(len(date)))
-    # minutesAsleep = list(xrange(len(date)))
-    # minutesAwake = list(xrange(len(date)))
-    # minutesAfterWakeup = list(xrange(len(date)))
-    # efficiency = list(xrange(len(date))) 
-
-    # for j in range(len(date)):
-    #     dtemp = date[j]
-    #     startTime[j] = [e['value'] for e in startTime_temp if e['dateTime'] == dtemp]
-    #     timeInBed[j] = [e['value'] for e in timeInBed_temp if e['dateTime'] == dtemp]
-    #     timestamp = dtemp + ' ' + startTime[j][0]
-    #     Tbed = datetime.strptime(timestamp, '%Y-%m-%d %H:%M')
-    #     Tawake = Tbed + timedelta(minutes=int(timeInBed[j][0]))
-    #     awakeTime[j] = [Tawake.strftime('%H:%M')]
-    #     minutesToFallAsleep[j] = [e['value'] for e in minutesToFallAsleep_temp if e['dateTime'] == dtemp]
-    #     minutesAsleep[j] = [e['value'] for e in minutesAsleep_temp if e['dateTime'] == dtemp]
-    #     minutesAwake[j] = [e['value'] for e in minutesAwake_temp if e['dateTime'] == dtemp]
-    #     minutesAfterWakeup[j] = [e['value'] for e in minutesAfterWakeup_temp if e['dateTime'] == dtemp]
-    #     efficiency[j] = [e['value'] for e in efficiency_temp if e['dateTime'] == dtemp]
-
-    # from itertools import izip
-    # sorted_list = sorted(izip(date, startTime, timeInBed, awakeTime, minutesToFallAsleep, minutesAsleep, minutesAwake, minutesAfterWakeup, efficiency), key=lambda x:x[0])
-
-    # date, bedTime, timeInBed, awakeTime, minutesToFallAsleep, minutesAsleep, minutesAwake, minutesAfterWakeup, efficiency = [[x[i] for x in sorted_list] for i in range(len(sorted_list[0]))]
-
-    # data = {
-    #     'date': date,
-    #     'bedTime': bedTime,
-    #     'timeInBed': timeInBed, 
-    #     'awakeTime': awakeTime,
-    #     'minutesToFallAsleep': minutesToFallAsleep,
-    #     'minutesAsleep': minutesAsleep,
-    #     'minutesAwake': minutesAwake,
-    #     'minutesAfterWakeup': minutesAfterWakeup,
-    #     'efficiency': efficiency,
-    # }
-
-    # data2 = {
-    #     'date': dateall,
-    #     'calories': calories,
-    # }
-
-    # s = json.dumps(data)
-    # a = json.dumps(data2)
+#     redis.delete('fitbit')
     
-    # redis.sadd('sleep', s)
-    # redis.sadd('activity', a)
-    # print s
+#     if True:
+#         sleepData = dict();
+#         sl1 = fb.time_series('sleep/startTime', period='max')['sleep-startTime']
+#         sl2 = fb.time_series('sleep/timeInBed', period='max')['sleep-timeInBed']
+#         sl3 = fb.time_series('sleep/minutesAsleep', period='max')['sleep-minutesAsleep']
+#         sl4 = fb.time_series('sleep/minutesAwake', period='max')['sleep-minutesAwake']
+#         sl5 = fb.time_series('sleep/minutesToFallAsleep', period='max')['sleep-minutesToFallAsleep']
+#         sl6 = fb.time_series('sleep/minutesAfterWakeup', period='max')['sleep-minutesAfterWakeup']
+#         sl7 = fb.time_series('sleep/efficiency', period='max')['sleep-efficiency']
+        
+#         for sl in range(len(sl1)):            
+#             if sl1[sl]['value'] != '':                
+#                 sleepData['date'] = sl1[sl]['dateTime']
+#                 sleepData['startTime'] = sl1[sl]['value']
+#                 sleepData['timeInBed'] = sl2[sl]['value']
+#                 sleepData['minutesAsleep'] = sl3[sl]['value']
+#                 sleepData['minutesAwake'] = sl4[sl]['value']
+#                 sleepData['minutesToFallAsleep'] = sl5[sl]['value']
+#                 sleepData['minutesAfterWakeup'] = sl6[sl]['value']
+#                 sleepData['efficiency'] = sl7[sl]['value']
+#                 sleepData['timezone'] = fb.user_profile_get()['user']['timezone']
+#                 sleepData['offsetFromUTCMillis'] = fb.user_profile_get()['user']['offsetFromUTCMillis']
+#                 s = json.dumps(sleepData)
+#                 redis.sadd('fitbit', s)
+#                 print s
 
 def detectSleep():
     import requests, json
@@ -156,14 +115,6 @@ def server():
     def sleep_json():
         fb = fitbit.Fitbit(os.getenv('FITBIT_KEY'), os.getenv('FITBIT_SECRET'), 
             user_key=flask.session['FITBIT_TOKEN'], user_secret=flask.session['FITBIT_TOKEN_SECRET'])
-
-        # Activity dataset
-        calories_temp = fb.time_series('activity/calories', period='max')['activity-calories']    
-        dateall = dict((t['dateTime'], i) for i, y in calories_temp)
-        for k in range(len(dateall)):
-            calories[j] = [e['value'] for e in calories_temp if e['dateTime'] == dtemp]
-
-        # Sleep dataset
         startTime_temp = fb.time_series('sleep/startTime', period='max')['sleep-startTime']
         timeInBed_temp = fb.time_series('sleep/timeInBed', period='max')['sleep-timeInBed']
         minutesAsleep_temp = fb.time_series('sleep/minutesAsleep', period='max')['sleep-minutesAsleep']
@@ -173,7 +124,7 @@ def server():
         efficiency_temp = fb.time_series('sleep/efficiency', period='max')['sleep-efficiency']
         
         from datetime import datetime, timedelta
-        # Take only recorded values
+
         temp = [datum for datum in startTime_temp if datum['value']]
         date = dict((t['dateTime'], i) for i, t in enumerate(temp))
         date = date.keys()
@@ -188,6 +139,7 @@ def server():
         efficiency = list(xrange(len(date))) 
 
         for j in range(len(date)):
+            print j
             dtemp = date[j]
             startTime[j] = [e['value'] for e in startTime_temp if e['dateTime'] == dtemp]
             timeInBed[j] = [e['value'] for e in timeInBed_temp if e['dateTime'] == dtemp]
@@ -218,20 +170,12 @@ def server():
             'efficiency': efficiency,
         }
 
-        data2 = {
-            'date': dateall,
-            'calories': calories,
-        }
+        s = json.dumps([json.loads(s) for s in 
+            list(redis.smembers('fitbit'))])
+        return s
 
-        s = json.dumps(data)
-        a = json.dumps(data2)
-        
-        redis.sadd('sleep', s)
-        redis.sadd('activity', a)
-        print s
-        print a
-
-
+        return json.dumps(data)
+    
     @app.route('/')
     def index_html():
         context = {
@@ -310,9 +254,9 @@ if __name__ == '__main__':
     parser.add_argument('command', action="store", choices=['authenticate', 'load', 'server'])
     args = parser.parse_args()
 
-    # if args.command == 'authenticate':
-    #     authenticate()
-    # if args.command == 'load':
-    #     load()
+    if args.command == 'authenticate':
+        authenticate()
+    if args.command == 'load':
+        load()
     if args.command == 'server':
         server()

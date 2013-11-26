@@ -63,7 +63,10 @@ def load():
         user_key=flask.session['FITBIT_TOKEN'], user_secret=flask.session['FITBIT_TOKEN_SECRET'])
     
     # Activity dataset
-    calories = fb.time_series('activity/calories', period='max')['activity-calories']
+    calories_temp = fb.time_series('activity/calories', period='max')['activity-calories']    
+    dateall = dict((t['dateTime'], i) for i, y in calories_temp)
+    for k in range(len(dateall)):
+        calories[j] = [e['value'] for e in calories_temp if e['dateTime'] == dtemp]
 
     # Sleep dataset
     startTime_temp = fb.time_series('sleep/startTime', period='max')['sleep-startTime']
@@ -75,7 +78,7 @@ def load():
     efficiency_temp = fb.time_series('sleep/efficiency', period='max')['sleep-efficiency']
     
     from datetime import datetime, timedelta
-
+    # Take only recorded values
     temp = [datum for datum in startTime_temp if datum['value']]
     date = dict((t['dateTime'], i) for i, t in enumerate(temp))
     date = date.keys()
@@ -120,8 +123,16 @@ def load():
         'efficiency': efficiency,
     }
 
+    data2 = {
+        'date': dateall,
+        'calories': calories,
+    }
+
     s = json.dumps(data)
-    redis.sadd('fitbit', s)
+    a = json.dumps(data2)
+    
+    redis.sadd('sleep', s)
+    redis.sadd('activity', a)
     print s
 
 # def loadold():
@@ -181,7 +192,7 @@ def server():
     @app.route('/sleep/sleepRecord.json')
     def sleep_json():
         s = json.dumps([json.loads(s) for s in 
-            list(redis.smembers('fitbit'))])
+            list(redis.smembers('sleep'))])
         return s
     
     @app.route('/')

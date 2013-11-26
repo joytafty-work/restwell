@@ -174,7 +174,7 @@ def server():
     def index_html():
         context = {
             'fitbit_authenticated': 'FITBIT_TOKEN' in flask.session,
-        }
+date}
         env = Environment(loader=FileSystemLoader('templates'))
         return env.get_template('index.html').render(context)
 

@@ -115,26 +115,26 @@ def server():
     def activity_json():
         fb = fitbit.Fitbit(os.getenv('FITBIT_KEY'), os.getenv('FITBIT_SECRET'), 
             user_key=flask.session['FITBIT_TOKEN'], user_secret=flask.session['FITBIT_TOKEN_SECRET'])
-        calories_temp = fb.time_series('activity/calories', period='max')
+        calories_temp = fb.time_series('activities/calories', period='max')['activities-calories']
         print calories_temp
 
-        # from datetime import datetime, timedelta
-        # dateall = dict((t['dateTime'], i) for i, t in calories_temp)
-        # dateall = dateall.keys()
+        from datetime import datetime, timedelta
+        dateall = dict((t['dateTime'], i) for i, t in calories_temp)
+        dateall = dateall.keys()
 
-        # for k in range(len(dateall)):
-        #     calories[k] = [e['value'] for e in calories_temp]
+        for k in range(len(dateall)):
+            calories[k] = [e['value'] for e in calories_temp]
 
-        # from itertools import izip
-        # sorted_list = sorted(izip(date, calories), key=lambda x:x[0])
-        # dates, calories = [[x[i] for x in sorted_list] for i in range(len(sorted_list[0]))]
+        from itertools import izip
+        sorted_list = sorted(izip(date, calories), key=lambda x:x[0])
+        dates, calories = [[x[i] for x in sorted_list] for i in range(len(sorted_list[0]))]
 
-        # data2 = {
-        #     'date': dates,
-        #     'calories': calories,
-        # }
+        data = {
+            'date': dates,
+            'calories': calories,
+        }
 
-        # return json.dumps(data2)
+        return json.dumps(data)
 
     @app.route('/sleep/sleepRecord.json')
     def sleep_json():

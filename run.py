@@ -58,8 +58,14 @@ def crossdomain(origin=None, methods=None, headers=None,
     return decorator
 
 def load():
+
     fb = fitbit.Fitbit(os.getenv('FITBIT_KEY'), os.getenv('FITBIT_SECRET'), 
         user_key=flask.session['FITBIT_TOKEN'], user_secret=flask.session['FITBIT_TOKEN_SECRET'])
+    
+    # Activity dataset
+    calories = fb.time_series('activity/calories', period='max')['activity-calories']
+
+    # Sleep dataset
     startTime_temp = fb.time_series('sleep/startTime', period='max')['sleep-startTime']
     timeInBed_temp = fb.time_series('sleep/timeInBed', period='max')['sleep-timeInBed']
     minutesAsleep_temp = fb.time_series('sleep/minutesAsleep', period='max')['sleep-minutesAsleep']
@@ -84,7 +90,6 @@ def load():
     efficiency = list(xrange(len(date))) 
 
     for j in range(len(date)):
-        print j
         dtemp = date[j]
         startTime[j] = [e['value'] for e in startTime_temp if e['dateTime'] == dtemp]
         timeInBed[j] = [e['value'] for e in timeInBed_temp if e['dateTime'] == dtemp]

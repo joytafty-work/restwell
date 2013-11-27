@@ -57,43 +57,6 @@ def crossdomain(origin=None, methods=None, headers=None,
         return update_wrapper(wrapped_function, f)
     return decorator
 
-# def load():
-
-#     # see: http://python-fitbit.readthedocs.org/en/latest/#fitbit-api
-#     fb = fitbit.Fitbit(
-#         os.getenv('CONSUMER_KEY'),
-#         os.getenv('CONSUMER_SECRET'), 
-#         user_key=os.getenv('USER_KEY'),
-#         user_secret=os.getenv('USER_SECRET'))
-    
-#     redis.delete('fitbit')
-    
-#     if True:
-#         sleepData = dict();
-#         sl1 = fb.time_series('sleep/startTime', period='max')['sleep-startTime']
-#         sl2 = fb.time_series('sleep/timeInBed', period='max')['sleep-timeInBed']
-#         sl3 = fb.time_series('sleep/minutesAsleep', period='max')['sleep-minutesAsleep']
-#         sl4 = fb.time_series('sleep/minutesAwake', period='max')['sleep-minutesAwake']
-#         sl5 = fb.time_series('sleep/minutesToFallAsleep', period='max')['sleep-minutesToFallAsleep']
-#         sl6 = fb.time_series('sleep/minutesAfterWakeup', period='max')['sleep-minutesAfterWakeup']
-#         sl7 = fb.time_series('sleep/efficiency', period='max')['sleep-efficiency']
-        
-#         for sl in range(len(sl1)):            
-#             if sl1[sl]['value'] != '':                
-#                 sleepData['date'] = sl1[sl]['dateTime']
-#                 sleepData['startTime'] = sl1[sl]['value']
-#                 sleepData['timeInBed'] = sl2[sl]['value']
-#                 sleepData['minutesAsleep'] = sl3[sl]['value']
-#                 sleepData['minutesAwake'] = sl4[sl]['value']
-#                 sleepData['minutesToFallAsleep'] = sl5[sl]['value']
-#                 sleepData['minutesAfterWakeup'] = sl6[sl]['value']
-#                 sleepData['efficiency'] = sl7[sl]['value']
-#                 sleepData['timezone'] = fb.user_profile_get()['user']['timezone']
-#                 sleepData['offsetFromUTCMillis'] = fb.user_profile_get()['user']['offsetFromUTCMillis']
-#                 s = json.dumps(sleepData)
-#                 redis.sadd('fitbit', s)
-#                 print s
-
 def detectSleep():
     import requests, json
     import pandas as pd
@@ -118,7 +81,8 @@ def server():
         calories_temp = fb.time_series('activities/calories', period='max')['activities-calories']
 
         from datetime import datetime, timedelta
-        temp = [datum for datum in calories_temp if float(datum['value']) > 0]
+        # temp = [datum for datum in calories_temp if float(datum['value']) > 0]
+        temp = [datum for datum in calories_temp if datum['value'] != 0]
         print temp
         dateall = dict((t['dateTime'], i) for i, t in enumerate(temp))
         dateall = dateall.keys()

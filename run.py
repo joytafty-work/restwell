@@ -90,9 +90,11 @@ def server():
         calories = list(xrange(len(dateall)))
         for k in range(len(dateall)):
             calories[k] = [e['value'] for e in calories_temp]
+            print calories[k]
 
         from itertools import izip
         sorted_list = sorted(izip(dateall, calories), key=lambda x:x[0])
+        print sorted_list
         dates, calories = [[x[i] for x in sorted_list] for i in range(len(sorted_list[0]))]
 
         data = {

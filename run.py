@@ -80,7 +80,7 @@ def server():
             user_key=flask.session['FITBIT_TOKEN'], user_secret=flask.session['FITBIT_TOKEN_SECRET'])
         calories_temp = fb.time_series('activities/calories', period='max')['activities-calories']
         caloriesTracker_temp = fb.time_series('activities/tracker/calories', period='max')['activities-tracker-calories']
-        print caloriesTracker_temp
+        steps_temp = fb.time_series('activities/tracker/steps', period=max)['activities-tracker-steps']
 
         from datetime import datetime, timedelta
         # temp = [datum for datum in calories_temp if float(datum['value']) > 0]
@@ -93,7 +93,8 @@ def server():
         for k in range(len(dateall)):
             dtemp = dateall[k]
             calories[k] = [float(e['value']) for e in calories_temp if e['dateTime'] == dtemp]
-            print calories[k]
+            caloriesTracker[k] = [float(e['value']) for e in caloriesTracker_temp if e['dateTime'] == dtemp]
+            steps[k] = [float(e['value']) for e in steps_temp if e['dateTime'] == dtemp]
 
         from itertools import izip
         sorted_list = sorted(izip(dateall, calories), key=lambda x:x[0])
@@ -103,6 +104,8 @@ def server():
         data = {
             'date': dates,
             'calories': calories,
+            'caloriesTracker': caloriesTracker,
+            'steps': steps, 
         }
 
         return json.dumps(data)

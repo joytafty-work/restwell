@@ -82,7 +82,7 @@ def server():
 
         from datetime import datetime, timedelta
         # temp = [datum for datum in calories_temp if float(datum['value']) > 0]
-        temp = [datum for datum in calories_temp if datum['value'] != 0]
+        temp = [datum for datum in calories_temp if datum['value'] != "0"]
         print temp
         dateall = dict((t['dateTime'], i) for i, t in enumerate(temp))
         dateall = dateall.keys()

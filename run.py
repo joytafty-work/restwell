@@ -92,7 +92,7 @@ def server():
         calories = list(xrange(len(dateall)))
         for k in range(len(dateall)):
             dtemp = dateall[k]
-            calories[k] = [e['value'] for e in calories_temp if e['dateTime'] == dtemp]
+            calories[k] = float(e['value']) for e in calories_temp if e['dateTime'] == dtemp
             print calories[k]
 
         from itertools import izip

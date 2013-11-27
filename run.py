@@ -81,7 +81,7 @@ def server():
         calories_intra = fb.time_series('activities/calories', period='max')['activities-calories']
         print calories_intra
 
-        json.dumps(calories_intra)
+        return json.dumps(calories_intra)
 
     @app.route('/activity.json')
     def activity_json():
@@ -94,7 +94,6 @@ def server():
         from datetime import datetime, timedelta
         # temp = [datum for datum in calories_temp if float(datum['value']) > 0]
         temp = [datum for datum in calories_temp if datum['value'] != "0"]
-        print temp
         dateall = dict((t['dateTime'], i) for i, t in enumerate(temp))
         dateall = dateall.keys()
 
@@ -109,7 +108,6 @@ def server():
 
         from itertools import izip
         sorted_list = sorted(izip(dateall, calories, caloriesTracker, steps), key=lambda x:x[0])
-        print sorted_list
         dates, calories, caloriesTracker, steps = [[x[i] for x in sorted_list] for i in range(len(sorted_list[0]))]
 
         data = {

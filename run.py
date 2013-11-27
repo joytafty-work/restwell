@@ -78,7 +78,7 @@ def server():
     def activity_json():
         fb = fitbit.Fitbit(os.getenv('FITBIT_KEY'), os.getenv('FITBIT_SECRET'), 
             user_key=flask.session['FITBIT_TOKEN'], user_secret=flask.session['FITBIT_TOKEN_SECRET'])
-        calories_temp = fb.time_series('activities/calories', period='max')['activities-calories']
+        calories_temp = fb.time_series('activities/tracker/calories', period='max')['activities-calories']
 
         from datetime import datetime, timedelta
         # temp = [datum for datum in calories_temp if float(datum['value']) > 0]
@@ -89,7 +89,8 @@ def server():
 
         calories = list(xrange(len(dateall)))
         for k in range(len(dateall)):
-            calories[k] = [e['value'] for e in calories_temp]
+            dtemp = dateall[k]
+            calories[k] = [e['value'] for e in calories_temp if e['dateTime'] == dtemp]
             print calories[k]
 
         from itertools import izip

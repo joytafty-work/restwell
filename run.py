@@ -90,6 +90,8 @@ def server():
         dateall = dateall.keys()
 
         calories = list(xrange(len(dateall)))
+        caloriesTracker = list(xrange(len(dateall)))
+        steps = list(xrange(len(dateall)))
         for k in range(len(dateall)):
             dtemp = dateall[k]
             calories[k] = [float(e['value']) for e in calories_temp if e['dateTime'] == dtemp]
@@ -97,9 +99,9 @@ def server():
             steps[k] = [float(e['value']) for e in steps_temp if e['dateTime'] == dtemp]
 
         from itertools import izip
-        sorted_list = sorted(izip(dateall, calories), key=lambda x:x[0])
+        sorted_list = sorted(izip(dateall, calories, caloriesTracker, steps), key=lambda x:x[0])
         print sorted_list
-        dates, calories = [[x[i] for x in sorted_list] for i in range(len(sorted_list[0]))]
+        dates, calories, caloriesTracker, steps = [[x[i] for x in sorted_list] for i in range(len(sorted_list[0]))]
 
         data = {
             'date': dates,

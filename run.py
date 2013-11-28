@@ -76,11 +76,11 @@ def server():
 
     @app.route('/activity_sleep_traintest.json')
     def activity_intraday_json():
+        date = date = datetime.datetime.strptime('2013-11-01', '%Y-%m-%d').date()
         fb = fitbit.Fitbit(os.getenv('FITBIT_KEY'), os.getenv('FITBIT_SECRET'), 
             user_key=flask.session['FITBIT_TOKEN'], user_secret=flask.session['FITBIT_TOKEN_SECRET'])
-        calories_intra = fb.time_series('/graph/getGraphData', period='1d')
+        calories_intra = fb.time_series('/graph/getGraphData', version="amchart", dataVersion=2112, chart_Type="column2d", period='1d', date=date)
         print calories_intra
-
 
         return json.dumps(calories_intra)
 

@@ -79,7 +79,7 @@ def server():
         dateval = datetime.datetime.strptime('2013-11-01', '%Y-%m-%d').date()
         fb = fitbit.Fitbit(os.getenv('FITBIT_KEY'), os.getenv('FITBIT_SECRET'), 
             user_key=flask.session['FITBIT_TOKEN'], user_secret=flask.session['FITBIT_TOKEN_SECRET'])
-        calories_intra = fb.time_series('activities/steps/date/2011-07-05/1d.xml', period='1d')
+        calories_intra = fb.time_series('activities/steps/', period='1d', date=dateval)
         print calories_intra
 
         return json.dumps(calories_intra)

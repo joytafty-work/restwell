@@ -74,12 +74,13 @@ def server():
             list(redis.smembers('fitbit'))])
         return s
 
-    @app.route('/activity_intraday.json')
+    @app.route('/activity_sleep_traintest.json')
     def activity_intraday_json():
         fb = fitbit.Fitbit(os.getenv('FITBIT_KEY'), os.getenv('FITBIT_SECRET'), 
             user_key=flask.session['FITBIT_TOKEN'], user_secret=flask.session['FITBIT_TOKEN_SECRET'])
-        calories_intra = fb.time_series('activities/calories', period='1d')['activities-calories']
+        calories_intra = fb.time_series('/graph/getGraphData', period='1d')
         print calories_intra
+
 
         return json.dumps(calories_intra)
 
